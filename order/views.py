@@ -1,3 +1,5 @@
+from django.contrib.auth.models import AnonymousUser ,User
+from django.contrib.auth import login
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -75,14 +77,15 @@ def deletefromcart(request,id):
     return HttpResponseRedirect("/cart/")
 
 def orderproduct(request):
+    user = User()
+    anonymous = AnonymousUser()
     setting = Site_Profile.objects.get(pk=1)
     topnav = Top_Nav.objects.all()
-    
     f1 = Foot1_Nav.objects.all() [:5]
-    
-    
     category = Category.objects.all()
-    # current_user = request.user  # Access User Session information
+
+
+
     # shopcart = ShopCart.objects.filter(user_id=current_user.id)
     # total=0
     # totaloff=0
@@ -101,6 +104,19 @@ def orderproduct(request):
             # Send Credit card to bank,  If the bank responds ok, continue, if not, show the error
             # ..............
             data = Order()
+            current_user = request.user  # Access User Session information
+            if current_user == anonymous :
+                user.first_name = form.cleaned_data['full_name']
+                user.username = request.POST['email']
+                user.email = request.POST['email']
+                user.password = 'pass@123'
+                user.save()
+                login(request,user)
+                SendEmailUserCreated(user.username,user.username,user.password)
+            else :
+                print('inside current!!',current_user)
+                user = current_user
+              
             id_variant = request.POST['productId']
             variant = Variants.objects.get(id=id_variant)
             product = Product.objects.get(id=variant.product.id)
@@ -112,6 +128,7 @@ def orderproduct(request):
             data.pincode = form.cleaned_data['pincode']
             data.phone = form.cleaned_data['phone']
             data.variant = variant
+            data.user=user
             data.payment_method = form.cleaned_data['payment_method']
             # data.user_id = current_user.id
             data.total = product.price
@@ -120,16 +137,18 @@ def orderproduct(request):
             data.code =  ordercode
             if  data.payment_method == 'Semi Cash On Delivery':
                 data.save()
+                SendEmailorder(to=data.user.email)
                 # ShopCart.objects.filter(user_id=current_user.id).delete() # Clear & Delete shopcart
                 request.session['cart_items']=0
                 messages.success(request, "Your Order has been completed. Thank you ")
-                return render(request, 'Checkout/checkout3.html',{'ordercode':ordercode,'category': category})
+                return render(request, 'Checkout/checkout3.html',{'ordercode':ordercode,'category': category,'setting': setting, 'f1': f1,'topnav': topnav,})
             elif data.payment_method == 'RazorPay':
+                SendEmailorder(to=data.user.email)
                 data.save()
                 # ShopCart.objects.filter(user_id=current_user.id).delete() # Clear & Delete shopcart
                 request.session['cart_items']=0
                 messages.success(request, "Your Order has been completed. Thank you ")
-                return render(request, 'Checkout/checkout3.html',{'ordercode':ordercode,'category': category})
+                return render(request, 'Checkout/checkout3.html',{'ordercode':ordercode,'category': category,'setting': setting, 'f1': f1,'topnav': topnav,})
 
         else:
             messages.warning(request, form.errors)
@@ -143,7 +162,7 @@ def orderproduct(request):
              'save': 1,
             #  'profile':profile,
              'payment_method':payment_method,
-             'setting': setting, 'f1': f1,  'topnav': topnav, 
+             'setting': setting, 'f1': f1,'topnav': topnav, 
              }
     return render(request,'Checkout/checkout2.html',context)
 
@@ -163,8 +182,9 @@ def data(request):
 def Create_RazorPayOrder(request):
     response=shopcart(request)
     id=request.GET.get('id')
+    setting = Site_Profile.objects.get(id=1)
     quantity=request.GET.get('quantity')
-    response = requests.request('GET',f'{{ setting.url }}/cart/?id={id}&quantity={quantity}')
+    response = requests.request('GET',f'{ setting.url }/cart/?id={id}&quantity={quantity}')
     grand_total=response.json()['total']
     grand_total=float(grand_total)
     #authenticating with razorpay client
@@ -254,7 +274,20 @@ def addtoshopcart(request,id):
 
 
 def SendEmailorder(to):
-    msg_html = render_to_string('Pages/order-success.html')
+    pending_amount = 0
+    user=User.objects.filter(email=to).first()
+    order = Order.objects.filter(user=user).order_by('-create_at')
+    setting = Site_Profile.objects.get(pk=1)
+    for i in order:
+        if i.payment_method == 'Semi Cash On Delivery':
+            pending_amount = i.variant.price - 1500
+    context={
+        "user":user,
+        "order":order,
+        "setting":setting,
+        "pending":pending_amount
+    }
+    msg_html = render_to_string('Pages/order-success.html',context)
     message = EmailMultiAlternatives('regarding order',"hello this is confirmation!!",settings.EMAIL_HOST_USER,[to])
     message.attach_alternative(msg_html,"text/html")
     message.send()

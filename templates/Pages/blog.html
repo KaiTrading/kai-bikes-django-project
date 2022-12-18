@@ -1,0 +1,80 @@
+{% extends 'Base/base.html' %} 
+{% load static %} 
+{% block title %} {{ blog.title }} - {{ setting.title }} {% endblock %}
+{% block body %}
+              
+<body class="blog-page blog-single-page">
+
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+        {% include 'Header/header.html' %}
+
+
+        <!--Body Container-->
+        <div id="page-content">
+            <!--Breadcrumbs-->
+            <div class="breadcrumbs-wrapper text-uppercase">
+                <div class="container">
+                    <div class="breadcrumbs"><a href="/" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">{{ blog.title }}</span></div>
+                </div>
+            </div>
+            <!--End Breadcrumbs-->
+
+            <!--Container-->
+            <div class="container">
+                <div class="row">
+                  
+
+                    <!--Main Content-->
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col">
+                        <div class="article"> 
+                            <h1 class="h3">{{ blog.title }}</h1>
+                            <ul class="publish-detail d-flex-wrap mb-4 pt-1">                      
+                                <li><i class="icon an an-clock-r"></i><time datetime="2021-01-28">{{blog.created_at}}</time></li>
+                               
+                            </ul>
+                            <!-- Article Image --> 
+                            <div class="article_featured-image"><img class="blur-up ls-is-cached lazyloaded" src="{{blog.image.url}}" data-src="{{blog.image.url}}" alt="blog" /></div> 
+                            <!-- Article Content --> 
+                            <div class="rte">
+                                {{blog.content | safe }}
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Main Content-->
+                </div>
+            </div>
+            <!--End Container-->
+        </div>
+        <!--End Body Container-->
+
+       
+        <!--Scoll Top-->
+        <!-- <span id="site-scroll"><i class="icon an an-chevron-up"></i></span> -->
+        <!--End Scoll Top-->
+
+        {% include 'Footer/footer.html' %}
+        <div class="modalOverly"></div>
+
+        {% include 'Index/includes/minicart-drawer.html' %}
+
+        <!-- Including Jquery -->
+        <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+        <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+        <!--Including Javascript-->
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+
+    </div>
+    <!--End Page Wrapper-->
+</body>
+
+
+{% endblock body %}
+
+
+
+
+  

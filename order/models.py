@@ -47,6 +47,7 @@ class Order(models.Model):
     full_name = models.CharField(max_length=500, blank=True)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     variant = models.ForeignKey(Variants,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     code = models.CharField(max_length=5, editable=False )
     phone = models.CharField(blank=True, max_length=10)
     address = models.CharField(blank=True, max_length=150)

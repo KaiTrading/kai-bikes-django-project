@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-
+from home.models import Foot1_Nav,Site_Profile,Top_Nav
 # Create your views here.
-from products.models import CommentForm, Comment
+from products.models import CommentForm, Comment , BlogModel
 
 
 def index(request):
@@ -29,3 +29,13 @@ def addcomment(request,id):
         return HttpResponseRedirect(url)
 
    return HttpResponseRedirect(url)
+
+
+
+def BlogDetailView(request,id):
+   setting = Site_Profile.objects.get(pk=1)
+   topnav = Top_Nav.objects.all()
+   f1 = Foot1_Nav.objects.all() [:5]
+   blog = BlogModel.objects.get(id=id)
+   context={'blog':blog,'setting':setting,'topnav':topnav,'f1':f1}
+   return render(request,'Pages/blog.html',context)

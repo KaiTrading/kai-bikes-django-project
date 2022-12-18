@@ -127,7 +127,8 @@ class Variants(models.Model):
 
     def __str__(self):
         return self.title
-
+        
+    @property
     def image(self):
         img = Images.objects.get(id=self.image_id)
         if img.id is not None:
@@ -167,13 +168,10 @@ class CommentForm(ModelForm):
         model = Comment
         fields = ['subject', 'comment', 'rate']
 
-
-
 class BlogModel(models.Model):
     title = models.CharField(max_length=100)
     image = CloudinaryField('blogimage', folder = "product/variant")
-    content = models.CharField(max_length=1000)
+    content = RichTextUploadingField()
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        
         return self.title
