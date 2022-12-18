@@ -1,0 +1,94 @@
+{% load static %}
+<!--You May Also Like Products-->
+<section class="section product-slider pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="section-header col-12">
+        <h2 class="text-transform-none">Latest Product</h2>
+      </div>
+    </div>
+    <div class="productSlider grid-products">
+      {% for lp in latest_products %}
+      <div class="item">
+        <!--Start Product Image-->
+        <div class="product-image">
+          <!--Start Product Image-->
+          <a href="/product/{{ lp.id }}/{{ lp.slug }}" class="product-img">
+            <!-- image -->
+            <img
+              class="primary blur-up lazyload"
+              data-src="{{lp.image.url}}"
+              src="{{lp.image.url}}"
+              alt="{{ setting.title }}"
+              title=""
+            />
+            <!-- End image -->
+            <!-- Hover image -->
+            <img
+              class="hover blur-up lazyload"
+              data-src="{{lp.image.url}}"
+              src="{{lp.image.url}}"
+              alt="{{ setting.title }}"
+              title=""
+            />
+            <!-- End hover image -->
+          </a>
+          <!--End Product Image-->
+        </div>
+        <!--End Product Image-->
+        <!--Start Product Details-->
+        <div class="product-details text-center">
+          <!--Product Name-->
+          <div class="product-name text-uppercase">
+            <a href="/product/{{ lp.id }}/{{ lp.slug }}">{{lp.title}}</a>
+          </div>
+          <!--End Product Name-->
+          <!--Product Price-->
+          <div class="product-price">
+            <span class="price">₹{{ lp.price }}</span>
+          </div>
+          <!--End Product Price-->
+
+          <!-- Color Variant -->
+          <ul class="swatches" id="colorpallate_{{lp.id}}_lp"></ul>
+          <script type="text/javascript">
+            $(document).ready(function () {
+              $.ajax({
+                url: `/colors/{{lp.id}}`,
+                method: "GET",
+                headers: { content_type: "application/json" },
+                success: function (result) {
+                  result["Colors"].forEach((color, index) => {
+                    if (
+                      document.getElementById(
+                        `licolor-latest-{{lp.id}}-${index}`
+                      ) == null
+                    ) {
+                      let liElement = document.createElement("li");
+                      liElement.classList.add("swatch", "medium");
+                      liElement.setAttribute(
+                        "style",
+                        `background-color :${color}`
+                      );
+                      liElement.setAttribute(
+                        "id",
+                        `licolor-latest-{{lp.id}}-${index}`
+                      );
+                      document
+                        .getElementById("colorpallate_{{lp.id}}_lp")
+                        .appendChild(liElement);
+                    }
+                  });
+                },
+              });
+            });
+          </script>
+          <!-- End Variant -->
+        </div>
+        <!--End Product Details-->
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!--End You May Also Like Products-->

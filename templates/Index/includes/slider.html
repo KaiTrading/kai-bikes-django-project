@@ -1,0 +1,17 @@
+{% load static %}
+    <!--Home Slider-->
+    <section class="slideshow slideshow-wrapper">
+      <div class="home-slideshow">
+        {% for lp in slider %}
+          <div class="slide">
+            <a href="{{ lp.link }}">
+              <div class="blur-up lazyload">
+                  <img class="blur-up lazyload desktop-hide" data-src="{{ lp.image.url }}" src="{{ lp.image.url }}" alt="Kai Bikes Slider Image" title="Kai Bikes Slider Image" />
+                  <img class="blur-up lazyload mobile-hide" data-src="{{ lp.mobimage.url }}" src="{{ lp.mobimage.url }}" alt="Kai Bikes Slider Image" title="Kai Bikes Slider Image" />
+              </div>
+            </a>
+          </div>
+          {% endfor%}
+      </div>
+  </section>
+  <!--End Home Slider-->

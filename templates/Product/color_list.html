@@ -1,0 +1,13 @@
+<input type="hidden" name="size" id="size" value="{{ size_id }}">
+<div class="item_color_list mb_30 clearfix">
+    <h4 class="list_title mb_15 text-uppercase">Color</h4>
+    <ul class="ul_li clearfix">
+        {% for rs in colors %}
+        <li {% if variant.id == rs.id %} class="active" {% endif %}>
+            <button type="radio" {% if variant.id == rs.id %} checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();">
+            <span><small data-bg-color="#{{ rs.color.code }}"></small></span> {{ rs.color }}
+            </button>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

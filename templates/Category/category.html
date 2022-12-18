@@ -1,0 +1,166 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block title %} {{ catdata.title }} - {{ setting.title }} {% endblock %}
+{% block description %} {{ catdata.description }} {% endblock %}
+{% block keywords %} {{ catdata.keywords }} {% endblock %}
+{% block body %}
+<!--Body Container-->
+
+<body class="template-index index-demo3">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." /></div>
+    <!-- End Page Loader -->
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+        {% include 'Header/header.html' %}
+        <!--Body Container-->
+        <div id="page-content">
+            <div id="page-content">
+                <!-- Collection Banner -->
+                <div class="collection-header">
+                    <div class="collection-hero large">
+                        <div class="collection-hero__image blur-up lazyload"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title medium">{{ catdata.title }}</h1>
+                            <div class="breadcrumbs text-uppercase mt-2"><a href="/"
+                                    title="Back to the home page">Home</a><span>|</span><span class="fw-bold">{{ catdata.title }}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Collection Banner -->
+
+                <div class="container">
+                    <div class="row">
+                        <!--Main Content-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+
+                            <!--Product List-->
+                            <div class="product-load-more">
+                                <!--Product Grid-->
+                                <div class="grid-products grid--view-items prd-grid">
+                                    <div class="row">
+                                        {% for lp in products %}
+                                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                            <!--Start Product Image-->
+                                            <div class="product-image">
+                                                <!--Start Product Image-->
+                                                <a href="/product/{{ lp.id }}/{{ lp.slug }}" class="product-img">
+                                                    <!-- image -->
+                                                    <img class="primary blur-up lazyload" data-src="{{ lp.image.url }}"
+                                                        alt="{{ lp.title }}" title="{{ lp.title }}">
+                                                    <!-- End image -->
+                                                    <!-- Hover image -->
+                                                    <img class="hover blur-up lazyload" data-src="{{ lp.image.url }}"
+                                                        src="{{ lp.image.url }}" alt="{{ lp.title }}"
+                                                        title="{{ lp.title }}">
+                                                    <!-- End hover image -->
+                                                    <!-- product label -->
+                                                    <div class="product-labels"><span
+                                                            class="lbl on-sale rounded">Sale</span></div>
+                                                    <!-- End product label -->
+                                                </a>
+                                                <!--End Product Image-->
+                                            </div>
+                                            <!--End Product Image-->
+                                            <!--Start Product Details-->
+                                            <div class="product-details text-center">
+                                                <!--Product Name-->
+                                                <div class="product-name text-uppercase">
+                                                    <a href="/product/{{ lp.id }}/{{ lp.slug }}">{{ lp.title }}</a>
+                                                </div>
+                                                <!--End Product Name-->
+                                                <!--Product Price-->
+                                                <div class="product-price">
+                                                    <span class="price">₹{{ lp.price }}</span>
+                                                </div>
+                                                <!--End Product Price-->
+                                                <!--Product Review-->
+                                                <div
+                                                    class="product-review d-flex align-items-center justify-content-center">
+                                                    <i class="an an-star"></i><i class="an an-star"></i><i
+                                                        class="an an-star"></i><i class="an an-star"></i><i
+                                                        class="an an-star"></i>
+                                                </div>
+                                                <!--End Product Review-->
+                                                <!--Color Variant-->
+                                                <ul class="swatches" id="colorpallate_{{lp.id}}_category">
+
+                                                </ul>
+
+
+                                                <script type="text/javascript">
+
+                                                    var xmlhttp;
+
+                                                    if (window.XMLHttpRequest) {
+                                                        xmlhttp = new XMLHttpRequest();
+                                                    }
+                                                    else {
+                                                        xmlhttp = new ActivexObject("Microsoft.XMLHTTP");
+                                                    }
+                                                    xmlhttp.open("GET", `/colors/{{lp.id}}`, false);
+
+                                                    xmlhttp.onreadystatechange = function () {
+
+                                                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                                            let result = JSON.parse(xmlhttp.responseText);
+                                                            result["Colors"].forEach((color) => {
+                                                            let liElement = document.createElement("li");
+                                                            liElement.classList.add("swatch", "medium");
+                                                            liElement.setAttribute("style", `background-color :${color}`);
+                                                            document.getElementById("colorpallate_{{lp.id}}_category").appendChild(liElement);
+                                                            })}
+                                                        }
+                                                        xmlhttp.send();
+                                                   
+                                                </script>
+                                                <!--End Color Variant-->
+                                            </div>
+                                            <!--End Product Details-->
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <!--End Product Grid-->
+                            </div>
+                            <!--End Product List-->
+
+                            <!--Collection Description-->
+                            <div class="collection-description mt-4 pt-2">
+                                {{ catdata.description | safe }}
+                            </div>
+                            <!--End Collection Description-->
+                        </div>
+                        <!--End Main Content-->
+                    </div>
+                </div>
+            </div>
+
+            <!--End Body Container-->
+            {% include 'Footer/footer.html' %}
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-arw-up"></i></span>
+            <!--End Scoll Top-->
+
+            <div class="modalOverly"></div>
+
+            {% include 'Index/includes/minicart-drawer.html' %}
+            <!-- Including Jquery -->
+            <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+            <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+            <!--Including Javascript-->
+            <script src="{% static 'assets/js/plugins.js' %}"></script>
+            <script src="{% static 'assets/js/main.js' %}"></script>   
+
+        </div>
+        <!--End Page Wrapper-->
+</body>
+
+
+
+<!--End Body Container-->
+{% endblock body %}
+{% block extra_js %}
+
+{% endblock extra_js %}

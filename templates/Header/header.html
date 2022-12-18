@@ -1,0 +1,137 @@
+{% load static %}
+     <!--Header-->
+     <div id="header" class="header-3">
+        <!--Topbar-->
+        <div class="top-bar">
+            <div class="container-fluid">
+                <div class="inner d-flex align-items-center">
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-none d-lg-flex d-md-flex">
+                        <span class="d-inline me-1">Follow Us:</span>
+                        <ul class="social-icons list-inline align-items-center">
+                            <li class="list-inline-item"><a href="https://api.whatsapp.com/send/?phone=+917043464986&text=Hello%2C+I+am+from+your+website."><i class="an an-whatsapp" aria-hidden="true"></i><span class="tooltip-label">Whatsapp</span></a></li>
+                            <li class="list-inline-item"><a href="{{ setting.facebook }}"><i class="an an-facebook" aria-hidden="true"></i><span class="tooltip-label">Facebook</span></a></li>
+                            <li class="list-inline-item"><a href="{{ setting.twitter }}"><i class="an an-twitter" aria-hidden="true"></i><span class="tooltip-label">Twitter</span></a></li>
+                            <li class="list-inline-item"><a href="{{ setting.instagram }}"><i class="an an-instagram" aria-hidden="true"></i><span class="tooltip-label">Instagram</span></a></li>
+                            <li class="list-inline-item"><a href="{{ setting.instagram }}"><i class="an an-linkedin" aria-hidden="true"></i><span class="tooltip-label">Linkedin</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-4 col-lg-4 text-center">
+                        FREE SHIPPING on order above ₹9,999
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 d-none d-lg-block d-md-block text-right">
+                        <p class="phone-no m-0 px-2 d-inline-block"><a href="tel:{{ setting.telephone }}" class="d-flex align-items-center"><i class="an an-phone-l me-2"></i> <span class="pno">+91 {{ setting.telephone }}</span></a></p>
+                        <p class="m-0 d-inline email-id d-none d-xl-inline-block"><a href="mailto:{{ setting.email }}" class="d-flex align-items-center"><i class="an an-envelope-l me-2"></i> <span class="eno">{{ setting.email }}</span></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Topbar-->
+         
+        <!--Header Content-->
+        <div class="header-main mih-80 classicHeader d-flex align-items-center">
+            <div class="container-fluid">        
+                <div class="row">
+                    <!--Logo / Menu Toggle-->
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center justify-content-start d-flex">
+                        <!--Mobile Toggle-->
+                        <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
+                        <!--End Mobile Toggle-->
+                        <!--Logo-->
+                        <div class="logo">
+                            <a href="/">
+                                <img src="{{ setting.logo.url }}" class="logo-img" alt="{{ setting.title }}" title="{{ setting.title }}" width="130" />
+                                <span class="logo-txt d-none">{{ setting.title }}</span>
+                            </a>
+                        </div>
+                        <!--End Logo-->
+                    </div>
+                    <!--End Logo / Menu Toggle-->
+                    <!--Main Navigation Desktop-->
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-7 col-xl-8 align-self-center d-menu-col">                              
+                        <!--Desktop Menu-->
+                        <nav class="grid__item" id="AccessibleNav">
+                            <ul id="siteNav" class="site-nav medium right hidearrow">
+                                {% for lp in topnav %}
+                                <li class="lvl1 parent megamenu"><a {% if request.path == '{{ lp.link }}' %}  {% endif %} href="{{ lp.link }}" >{{ lp.link_text }} <i class="an an-angle-down-l"></i></a>
+                                </li>
+                                {% endfor%}
+                            </ul>
+                        </nav>
+                        <!--End Desktop Menu-->                                   
+                    </div>
+                    <!--End Main Navigation Desktop-->
+                    <!--Right Action-->
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-2 align-self-center icons-col text-right d-flex justify-content-end">
+                        <!--Search-->
+                        <div class="site-search iconset"><i class="icon an an-search-l"></i><span class="tooltip-label">Search</span></div>
+                        <!--End Search-->
+                    
+                        
+                        <!--Minicart Drawer-->
+                        <div class="header-cart iconset">
+                            <a href="{{ setting.url }}/order/checkout/" class="site-header__cart btn-minicart">
+                                <i class="icon an an-sq-bag"></i><span class="site-cart-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle" id="cartcount"></span><span class="tooltip-label">Cart</span>
+                            </a>
+                        </div>
+                        <!--End Minicart Drawer-->
+                    </div>
+                    <!--End Right Action-->
+                </div>
+            </div>
+            <!--Search Popup-->
+            <div id="search-popup" class="search-drawer">
+                <div class="container-fluid px-0">
+                    <span class="closeSearch an an-times-l"></span>
+                    <form class="form minisearch" id="header-search" action="#" method="get">
+                        <label class="label"><span>Search</span></label>
+                        <div class="control">
+                            <div class="searchField">
+                                <div class="search-category">
+                                    <select id="rgsearch-category" name="rgsearch[category]" data-default="All Categories">
+                                        <option value="00" label="All Categories" selected="selected">All Categories</option>
+                                        <optgroup id="rgsearch-shop" label="Shop">
+                                            <option value="0">- Bicycles</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="input-box">
+                                    <button type="submit" title="Search" class="action search" disabled=""><i class="icon an an-search-l"></i></button>
+                                    <input type="text" name="q" value="" placeholder="Search by keyword or #" class="input-text">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--End Search Popup-->
+        </div>
+        <!--End Header Content-->
+    
+        <!--Mobile Menu-->
+        <div class="mobile-nav-wrapper" role="navigation">
+            <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
+                <ul id="MobileNav" class="mobile-nav">
+                    {% for lp in topnav %}
+                    <li class="lvl1 parent megamenu"><a href={% if request.path == '{{ lp.link }}' %}  {% endif %} href="{{ lp.link }}" >{{ lp.link_text }} </a>
+                    </li>
+                    {% endfor %}
+                    <li class="help bottom-link"><a href="tel:{{ setting.telephone }}"><b>NEED HELP?</b><br>Call: +91 {{ setting.telephone }}</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--End Mobile Menu-->
+
+
+
+<script>
+
+    if(localStorage.getItem('cart'))
+    {
+        document.getElementById('cartcount').innerHTML = 1 ;        
+    }
+    else
+    {
+        document.getElementById('cartcount').innerHTML = 0 ;  
+    }
+
+</script>

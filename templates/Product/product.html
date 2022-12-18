@@ -1,0 +1,589 @@
+{% extends 'Base/base.html' %} 
+{% load static %} {% block title %} {{ product.meta_title }} - {{ setting.title }} {% endblock %} 
+{% block description %} {{ product.meta_description }} {% endblock %}
+{% block keywords %} {{ product.keywords }} {% endblock %}
+{% block body %} 
+<body class="template-product product-simple-layout">
+    <!-- Page Loader -->
+    <div id="pre-loader">
+      <img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." />
+    </div>
+    <!-- End Page Loader -->
+
+    <!-- Product Schema -->
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "sku": "{{ product.sku }}",
+        "mpn": "{{ product.mpn }}",
+        "image": [
+          {% for rs in images %}
+          "{{ rs.image.url }}",
+          {% endfor %}
+          "{{ product.image.url }}"
+        ],
+        "name": "{{ product.title }}",
+        "description": "Trinket with clean lines",
+        "brand": {
+          "@type": "Brand",
+          "name": "Kai Bikes"
+        },
+        "positiveNotes": {
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Grate quality metrial"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Value for money product"
+            }
+          ]
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "{{ setting.url }}/product/{{ product.id }}/{{ product.slug }}",
+          "itemCondition": "https://schema.org/NewCondition",
+          "availability": "https://schema.org/InStock",
+          "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+            "price": {{ variant.price}},
+            "priceCurrency": "INR"
+          },
+          "priceValidUntil": "2023-12-31",
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "value": "0",
+              "currency": "INR"
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "IN"
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": "1",
+                "maxValue": "2"
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": "3",
+                "maxValue": "5"
+              }
+            }
+          }
+        },
+        "review": {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "4.5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "{{ setting.owner_name}}"
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.5",
+          "reviewCount": "1789"
+        }
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+      "@context": "http://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement":[
+        {
+        "@type": "ListItem",
+        "position": 1,
+        "item":
+         {
+         "@id": "{{ setting.url }}/category/{{ product.category.id }}/{{ product.category.slug }}",
+         "name": "{{ product.category.title }}"
+         }
+        }
+       ]
+      }
+    </script>
+
+    <!-- End Schema -->
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper"> {% include 'Header/header.html' %}
+      <!--Body Container-->
+      <div id="page-content">
+        <!--Breadcrumbs-->
+        <div class="breadcrumbs-wrapper text-uppercase">
+          <div class="container">
+            <div class="breadcrumbs">
+              <a href="/" title="Back to the home page">Home</a>
+              <span>|</span>
+              <span class="fw-bold">
+                <a href="/category/{{ product.category.id }}/{{ product.category.slug }}">{{ product.category.title }}</a>
+              </span>
+              <span>|</span>
+              <span class="fw-bold">{{ product.title }}</span>
+            </div>
+          </div>
+        </div>
+        <!--End Breadcrumbs-->
+        <!--Main Content-->
+        <div class="container">
+          <!--Product Content-->
+          <div class="product-single">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="product-details-img product-horizontal-style clearfix mb-3 mb-md-0">
+                  <div class="zoompro-wrap product-zoom-right w-100 p-0"> {% if variant.image_id > 0 %} <div class="zoompro-span">
+                      <img id="zoompro" class="zoompro" src="{{ variant.image }}" data-zoom-image="{{ variant.image }}" alt="{{ product.title }}" />
+                    </div> {% else %} <div class="zoompro-span">
+                      <img id="zoompro" class="zoompro" src="{{ product.image.url }}" data-zoom-image="{{ product.image.url }}" alt="{{ product.title }}" />
+                    </div> {% endif %} <div class="product-labels d-none">
+                      <span class="lbl pr-label1">new</span>
+                    </div>
+                  </div>
+                  <div class="product-thumb product-horizontal-thumb w-100 pt-2 mt-1">
+                    <div id="gallery" class="product-thumb-style1 overflow-hidden"> {% for rs in images %} <a data-image="{{ rs.image.url }}" data-zoom-image="{{ rs.image.url }}" class="slick-slide slick-cloned active">
+                        <img class="blur-up lazyload" data-src="{{ rs.image.url }}" src="{{ rs.image.url }}" alt="{{ product.title }}" />
+                      </a> {% endfor %} </div>
+                  </div>
+                  <div class="lightboximages"> {% for rs in images %} <a href="{{ rs.image.url }}" data-size="1000x1280"></a> {% endfor %} </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <!-- Product Info -->
+                <div class="product-single__meta">
+                  <h1 class="product-single__title">{{ product.title }} - {{ variant.color}}</h1>
+                  <!-- Product Reviews -->
+                  <div class="product-review">
+                    <a class="reviewLink d-flex-center"> {% for i in review_list %} {% if product_review <= i and product_review != 0  %} <i class="an an-star"></i> {% else %} <i class="an an-star-o"></i> {% endif %} {% endfor %} </a>
+                  </div>
+                  <!-- End Product Reviews -->
+                  <!-- Product Info -->
+                  <div class="prInfoRow product-info mt-2 d-flex-wrap">
+                    <p class="product-sku">SKU: <span class="variant-sku">{{ product.sku }}</span>
+                    </p>
+                  </div>
+                  <!-- End Product Info -->
+                  <!-- Product Price -->
+                  <div class="product-single__price pb-0 mb-0">
+                    <span class="visually-hidden">Regular price</span>
+                    <span class="product-price__sale--single">
+                      <span class="product-price-old-price">₹{{ product.price }}</span>
+                      <span class="product-price__price product-price__sale">₹{{ variant.price}}</span>
+                    </span>
+                  </div>
+                  <!-- End Product Price -->
+                </div>
+                <!-- End Product Info -->
+                <div class="product-single__description rte">
+                  <ul class="checkmarkList">
+                    {{ product.short_description | safe  }}
+                  </ul>
+                </div>
+                <script>
+                  $(document).on("change", "#post-form", function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                      type: "POST",
+                      url: '{% url "ajaxcolor" %}',
+                      data: {
+                        productid: $("#productid").val(),
+                        size: $("#size").val(),
+                        csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+                        action: "post",
+                      },
+                      data_type: "html",
+                      success: function(data) {
+                        console.log("success");
+                        $("#appendHere").html(data.rendered_table);
+                      },
+                      error: function(data) {
+                        alert("Got an error dude " + data);
+                      },
+                    });
+                  });
+                </script>
+                <!-- Product Form --> {% if product.variant == 'Size-Color' %} <form method="post" action="?q=selectvariant" class="product-form form-bordered hidedropdown" id="post-color"> {% csrf_token %}
+                  <!-- Swatches Color -->
+                  <div class="swatches-image swatch clearfix swatch-0 option1" data-option-index="0" id="appendHere">
+                    <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                    <div class="product-form__item">
+                      <label class="label d-flex">Color: <span class="required d-none">*</span>
+                        <span class="slVariant ms-1 fw-bold">{{variant.color}}</span>
+                      </label>
+                      <ul class="swatches-image swatches d-flex-wrap list-unstyled clearfix"> {% for rs in colors %} <li {% if variant.id == rs.id %} class="swatch-element color available active" {% else %} class="swatch-element color available" {% endif %}>
+                          <button type="radio" {% if variant.id == rs.id %} checked {% endif %} class="rounded-0 swatchLbl small color" name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();" style="background-color:{{ rs.color.code }}"></button>
+                          <span class="tooltip-label top">{{ rs.color }}</span>
+                        </li> {% endfor %} </ul>
+                    </div>
+                  </div>
+                </form>
+                <!-- End Swatches Color -->
+                <!-- Swatches Size -->
+                <form method="post" action="?q=selectvariant" class="product-form form-bordered hidedropdown" id="post-form"> {% csrf_token %} <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                  <div class="swatch clearfix swatch-1 option2" data-option-index="1" id="post-color">
+                    <div class="product-form__item">
+                      <label class="label d-flex">Size: <span class="required d-none">*</span>
+                        <span class="slVariant ms-1 fw-bold">S</span>
+                      </label>
+                      <ul class="swatches-size d-flex-center list-unstyled clearfix"> {% for rs in sizes %} <li {% if variant.size_id == rs.id %} class="swatch-element xs available active" {% else %} class="swatch-element xs available " {% endif %} data-value="{{ rs.size.name }}"></li>
+                        <button type="radio" {% if variant.id == rs.id %} checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();"></button>
+                        <span class="tooltip-label">{{ rs.size.name }}</span>
+                        </li> {% endfor %} <li class="ms-1">
+                          <a href="#sizechart" class="sizelink link-underline text-uppercase">
+                            <i class="icon an an-ruler d-none"></i> Size Guide </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </form> {% elif product.variant == 'Color' %} <form method="post" action="?q=selectvariant" class="product-form form-bordered hidedropdown" id="post-color"> {% csrf_token %}
+                  <!-- Swatches Color -->
+                  <div class="swatches-image swatch clearfix swatch-0 option1" data-option-index="0" id="appendHere">
+                    <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                    <div class="product-form__item">
+                      <label class="label d-flex">Color: <span class="required d-none">*</span>
+                        <span class="slVariant ms-1 fw-bold">{{variant.color}}</span>
+                      </label>
+                      <ul class="swatches-image swatches d-flex-wrap list-unstyled clearfix"> {% for rs in colors %} <li {% if variant.id == rs.id %} class="swatch-element color available active" {% else %} class="swatch-element color available" {% endif %}>
+                          <button type="radio" {% if variant.id == rs.id %} checked {% endif %} class="rounded-0 swatchLbl small color" name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();" style="background-color:{{ rs.color.code }}"></button>
+                          <span class="tooltip-label top">{{ rs.color }}</span>
+                        </li> {% endfor %} </ul>
+                    </div>
+                  </div>
+                </form> {% elif product.variant == 'Size' %} <form method="post" action="?q=selectvariant" class="product-form form-bordered hidedropdown" id="post-form"> {% csrf_token %} <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                  <div class="swatch clearfix swatch-1 option2" data-option-index="1" id="post-color">
+                    <div class="product-form__item">
+                      <label class="label d-flex">Size: <span class="required d-none">*</span>
+                        <span class="slVariant ms-1 fw-bold">S</span>
+                      </label>
+                      <ul class="swatches-size d-flex-center list-unstyled clearfix"> {% for rs in sizes %} <li {% if variant.size_id == rs.id %} class="swatch-element xs available active" {% else %} class="swatch-element xs available " {% endif %} data-value="{{ rs.size.name }}"></li>
+                        <button type="radio" {% if variant.id == rs.id %} checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();"></button>
+                        <span class="tooltip-label">{{ rs.size.name }}</span>
+                        </li> {% endfor %} <li class="ms-1">
+                          <a href="#sizechart" class="sizelink link-underline text-uppercase">
+                            <i class="icon an an-ruler d-none"></i> Size Guide </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </form> {% endif %}
+                <!-- End Swatches Size -->
+                <!-- Product Action -->
+                <div class="product-action w-100 clearfix">
+                  <div class="product-form__item--quantity d-flex-center mb-3">
+                    <div class="qtyField">
+                      <a class="qtyBtn minus">
+                        <i class="icon an an-minus-r" aria-hidden="true"></i>
+                      </a>
+                      <input disabled type="text" name="quantity" value="1" class="product-form__input qty rounded-0">
+                      <a class="qtyBtn plus" href="javascript:void(0);">
+                        <i class="icon an an-plus-r" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                    <div class="pro-stockLbl ms-3">
+                      <span class="d-flex-center stockLbl instock">
+                        <i class="icon an an-check-cil"></i>
+                        <span> In stock</span>
+                      </span>
+                      <span class="d-flex-center stockLbl preorder d-none">
+                        <i class="icon an an-clock-r"></i>
+                        <span> Pre-order Now</span>
+                      </span>
+                      <span class="d-flex-center stockLbl outstock d-none">
+                        <i class="icon an an-times-cil"></i>
+                        <span>Sold out</span>
+                      </span>
+                      <span class="d-flex-center stockLbl lowstock d-none" data-qty="15">
+                        <i class="icon an an-exclamation-cir"></i>
+                        <span> Order now, Only <span class="items">10</span> left! </span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="row g-2">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                      <div class="product-form__item--submit">
+                        <button onclick="addcart('{{variant.id}}')" type="submit" name="add" class="btn rounded-0 product-form__cart-submit mb-0">
+                          <span>Buy It Now</span>
+                        </button>
+                        <button type="submit" name="add" class="btn rounded-0 product-form__sold-out mb-0 d-none" disabled="disabled">Sold out</button>
+                      </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                      <div class="product-form__item--buyit clearfix">
+                        <a href="{{ variant.amazon_link}}" type="button" class="btn rounded-0 btn-outline-primary proceed-to-checkout">Buy On Amazon</a>
+                      </div>
+                    </div>                    
+                  </div>
+                  
+                  <div class="trustseal-img mt-4"><img src="{% static 'assets/images/powerby-cards.jpg' %}" alt="powerby cards" /></div> <br>
+
+                  <div class="agree-check customCheckbox clearfix d-none">
+                    <input id="prTearm" name="tearm" type="checkbox" value="tearm" required />
+                    <label for="prTearm">I agree with the terms and conditions</label>
+                  </div>
+                </div>
+                <!-- End Product Action -->
+                <!-- Product Info link -->
+                <p class="infolinks d-flex-center mt-2 mb-0">
+                  <a class="btn shippingInfo" href="#ShippingInfo">
+                    <i class="icon an an-paper-l-plane me-1"></i>
+                    <span> Delivery &amp; Returns</span>
+                  </a>
+                  <a class="btn me-0" href="https://api.whatsapp.com/send/?phone=+917043464986&text=Hello%2C+I+am+from+your+website+I+want+{{ product.title }}+{{ variant.color}}.">
+                    <i class="icon an an-question-cil me-1"></i>
+                    <span> Enquiry</span>
+                  </a>
+                </p>
+                <!-- End Product Info link -->
+                <!-- End Product Form -->
+                <!-- Social Sharing -->
+                <div class="social-sharing d-flex-center mb-3">
+                  <span class="sharing-lbl me-2">Share :</span>
+                  <a href="#" class="d-flex-center btn btn-link btn--share share-facebook" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Facebook">
+                    <i class="icon an an-facebook mx-1"></i>
+                    <span class="share-title d-none">Facebook</span>
+                  </a>
+                  <a href="#" class="d-flex-center btn btn-link btn--share share-twitter" data-bs-toggle="tooltip" data-bs-placement="top" title="Tweet on Twitter">
+                    <i class="icon an an-twitter mx-1"></i>
+                    <span class="share-title d-none">Tweet</span>
+                  </a>
+                  <a href="#" class="d-flex-center btn btn-link btn--share share-pinterest" data-bs-toggle="tooltip" data-bs-placement="top" title="Pin on Pinterest">
+                    <i class="icon an an-pinterest-p mx-1"></i>
+                    <span class="share-title d-none">Pin it</span>
+                  </a>
+                  <a href="#" class="d-flex-center btn btn-link btn--share share-linkedin" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Linkedin">
+                    <i class="icon an an-linkedin mx-1"></i>
+                    <span class="share-title d-none">Linkedin</span>
+                  </a>
+                  <a href="#" class="d-flex-center btn btn-link btn--share share-email" data-bs-toggle="tooltip" data-bs-placement="top" title="Share by Email">
+                    <i class="icon an an-envelope-l mx-1"></i>
+                    <span class="share-title d-none">Email</span>
+                  </a>
+                </div>
+                <!-- End Social Sharing -->
+                <!-- Product Info -->
+                <div class="freeShipMsg" data-price="199">
+                  <i class="icon an an-truck" aria-hidden="true"></i>SPENT <b class="freeShip">
+                    <span class="money" data-currency-usd="₹9,999.00" data-currency="USD">₹9,999.00</span>
+                  </b> MORE FOR FREE SHIPPING
+                </div>
+                <div class="shippingMsg">
+                  <i class="icon an an-clock-r" aria-hidden="true"></i>Estimated Delivery Between <b id="fromDate">{{ shipping_date|date:"D, M d"}}</b> and <b id="toDate">{{ shipping_date2|date:"D, M d"}}</b>.
+                </div>
+                <div class="userViewMsg" data-user="20" data-time="11000">
+                  <i class="icon an an-eye-r" aria-hidden="true"></i>
+                  <strong class="uersView">21</strong> People are Looking for this Product
+                </div>
+                <!-- End Product Info -->
+                <!-- Product Info -->
+                <div class="product-info">
+                  <p class="product-cat">Category: <span>
+                      <a href="/category/{{ product.category.id }}/{{ product.category.slug }}">{{ product.category.title }}</a>
+                    </span>
+                  </p>
+                  <p class="product-tags">Tags: <span>{{product.keywords}}</span>
+                  </p>
+                </div>
+                <!-- End Product Info -->
+              </div>
+            </div>
+          </div>
+          <!--Product Content-->
+          <!--Product Tabs-->
+          <div class="tabs-listing style2 mt-0 mt-md-5">
+            <ul class="product-tabs style2 list-unstyled d-flex-wrap justify-content-center m-0 d-none d-md-flex">
+              <li rel="description" class="active">
+                <a class="tablink">Description</a>
+              </li>
+              <li rel="shipping-return">
+                <a class="tablink">Shipping &amp; Return</a>
+              </li>
+              <li rel="reviews">
+                <a class="tablink">Reviews</a>
+              </li>
+            </ul>
+            <div class="tab-container">
+              <h3 class="tabs-ac-style d-md-none active" rel="description">Description</h3>
+              <div id="description" class="tab-content">
+                <div class="product-description">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4 mb-md-0">
+                      {{ product.description | safe }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3 class="tabs-ac-style d-md-none" rel="shipping-return">Shipping &amp; Return</h3>
+              <div id="shipping-return" class="tab-content">
+                <h4 class="pt-2 text-uppercase">Delivery</h4>
+                <ul>
+                  <li>Dispatch: Within 24 Hours</li>
+                  <li>Free shipping across all over India minimum purchase of ₹9,999.</li>
+                  <li>Estimated Delivery Between - 4-5 business days</li>
+                  <li>Cash on delivery and EMI is available</li>
+                  <li>Easy 7 days returns and exchanges</li>
+                </ul>
+                <h4 class="pt-2 text-uppercase">Returns</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                <h4 class="pt-2 text-uppercase">Shipping</h4>
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage.</p>
+              </div>
+              <h3 class="tabs-ac-style d-md-none" rel="reviews">Review</h3>
+              <div id="reviews" class="tab-content">
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="spr-header clearfix d-flex-center justify-content-between">
+                      <div class="product-review d-flex-center me-auto"></div>
+                      <div class="spr-summary-actions mt-3 mt-sm-0">
+                        <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded-0">
+                          <i class="icon an-1x an an-pencil-alt me-2"></i>Write a review </a>
+                      </div>
+                    </div>
+                    <form method="post" action="#" class="product-review-form new-review-form mb-4">
+                      <h4 class="spr-form-title text-uppercase">Write A Review</h4>
+                      <fieldset class="spr-form-contact">
+                        <div class="spr-form-contact-name form-group">
+                          <label class="spr-form-label" for="nickname">Name <span class="required">*</span>
+                          </label>
+                          <input class="spr-form-input spr-form-input-text rounded-0" id="nickname" type="text" name="name" placeholder="John smith" required />
+                        </div>
+                        <div class="spr-form-contact-email form-group">
+                          <label class="spr-form-label" for="email">Email <span class="required">*</span>
+                          </label>
+                          <input class="spr-form-input spr-form-input-email rounded-0" id="email" type="email" name="email" placeholder="info@example.com" required />
+                        </div>
+                        <div class="spr-form-review-rating form-group">
+                          <label class="spr-form-label">Rating</label>
+                          <div class="product-review pt-1">
+                            <div class="review-rating">
+                              <input type="radio" name="rating" id="rating-5">
+                              <label for="rating-5"></label>
+                              <input type="radio" name="rating" id="rating-4">
+                              <label for="rating-4"></label>
+                              <input type="radio" name="rating" id="rating-3">
+                              <label for="rating-3"></label>
+                              <input type="radio" name="rating" id="rating-2">
+                              <label for="rating-2"></label>
+                              <input type="radio" name="rating" id="rating-1">
+                              <label for="rating-1"></label>
+                            </div>
+                            <a class="reviewLink d-none" href="#">
+                              <i class="icon an an-star-o"></i>
+                              <i class="icon an an-star-o mx-1"></i>
+                              <i class="icon an an-star-o"></i>
+                              <i class="icon an an-star-o mx-1"></i>
+                              <i class="icon an an-star-o"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="spr-form-review-title form-group">
+                          <label class="spr-form-label" for="review">Review Title </label>
+                          <input class="spr-form-input spr-form-input-text rounded-0" id="review" type="text" name="review" placeholder="Give your review a title" />
+                        </div>
+                        <div class="spr-form-review-body form-group">
+                          <label class="spr-form-label" for="message">Body of Review <span class="spr-form-review-body-charactersremaining">(1500) characters remaining</span>
+                          </label>
+                          <div class="spr-form-input">
+                            <textarea class="spr-form-input spr-form-input-textarea rounded-0" id="message" name="message" rows="5" placeholder="Write your comments here"></textarea>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <div class="spr-form-actions clearfix">
+                        <input type="submit" class="btn btn-primary rounded-0 spr-button spr-button-primary" value="Submit Review">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="spr-reviews">
+                      <h4 class="spr-form-title text-uppercase mb-3">Customer Reviews</h4>
+                      <div class="review-inner"> {% for rs in comments %} <div class="spr-review">
+                          <div class="spr-review-header">
+                            <span class="product-review spr-starratings">
+                              <span class="reviewLink">
+                                <i class="icon an an-star"></i>
+                                <i class="icon an an-star mx-1"></i>
+                                <i class="icon an an-star"></i>
+                                <i class="icon an an-star mx-1"></i>
+                                <i class="icon an an-star-o"></i>
+                              </span>
+                            </span>
+                            <span class="spr-review-header-byline">
+                              <strong>{{rs.user.username }}</strong> on <strong>{{ rs.create_at}}</strong>
+                            </span>
+                          </div>
+                          <div class="spr-review-content">
+                            <p class="spr-review-content-body">{{ rs.comment }}</p>
+                          </div>
+                        </div> {% endfor %} </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--End Product Tabs-->
+        </div>
+        <!--End Container--> 
+        {% include 'Index/includes/alsolike.html' %}
+        <!--End Body Container--> 
+        {% include 'Footer/footer.html' %}
+        <!-- Shipping Popup-->
+        <div id="ShippingInfo" class="mfpbox mfp-with-anim mfp-hide">
+          <h5>DELIVERY</h5>
+          <ul>
+            <li>Dispatch: Within 24 Hours</li>
+            <li>Free shipping across all over India minimum purchase of ₹9,999.</li>
+            <li>Estimated Delivery Between - 4-5 business days</li>
+            <li>Cash on delivery and EMI is available</li>
+            <li>Easy 7 days returns and exchanges</li>
+          </ul>
+          <h5>RETURNS</h5>
+          <p>If you do not like the product you can return it within 15 days - no questions asked. This excludes bodysuits, swimwear and clearance sale items. We have an easy and hassle free return policy. Please look at our Delivery &amp; Returns section for further information.</p>
+        </div>
+        <!-- End Shipping Popup-->
+        <!--Scoll Top-->
+        <span id="site-scroll">
+          <i class="icon an an-arw-up"></i>
+        </span>
+        <!--End Scoll Top-->
+        <div class="modalOverly"></div> {% include 'Index/includes/minicart-drawer.html' %}
+        <!-- Including Jquery -->
+        <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+        <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+        <!--Including Javascript-->
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        <script>
+          function addcart(id) {
+            let quantity = 0;
+            if (localStorage.getItem('cart')) {
+              localStorage.clear();
+            }
+            quantity = 1;
+            let cart_data = {
+              'product_id': id,
+              'quantity': quantity
+            };
+            localStorage.setItem('cart', JSON.stringify(cart_data));
+            location.href = '/order/checkout';
+          }
+        </script>
+      </div>
+      <!--End Page Wrapper-->
+  </body> 
+{% endblock body %}

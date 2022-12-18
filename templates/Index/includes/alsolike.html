@@ -1,0 +1,98 @@
+<section class="section product-slider pb-0">
+    <div class="container">
+        <div class="row">
+            <div class="section-header col-12">
+                <h2 class="text-transform-none">You May Also Like</h2>
+            </div>
+        </div>
+        <div class="productSlider grid-products">
+
+            {% for lp in popular_products %}
+            <div class="item">
+                <!--Start Product Image-->
+                <div class="product-image">
+                    <!--Start Product Image-->
+                    <a href="/product/{{ lp.id }}/{{ lp.slug }}" class="product-img">
+                        <!-- image -->
+                        <img class="primary blur-up lazyload" data-src="{{ lp.image.url }}" src="{{ lp.image.url }}"
+                            alt="{{ setting.title }}" title="">
+                        <!-- End image -->
+                        <!-- Hover image -->
+                        <img class="hover blur-up lazyload" data-src="{{ lp.image.url }}" src="{{ lp.image.url }}"
+                            alt="{{ setting.title }}" title="">
+                        <!-- End hover image -->
+                        <!-- product label -->
+                        <div class="product-labels"><span class="lbl on-sale">50% Off</span></div>
+                        <!-- End product label -->
+                    </a>
+                    <!--End Product Image-->
+
+                    <!--Product Button-->
+                    <div class="button-set style0 d-none d-md-block">
+                        <ul>
+                            <!--Cart Button-->
+                            <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i
+                                        class="icon an an-cart-l"></i> <span class="tooltip-label top">Add to
+                                        Cart</span></a></li>
+                            <!--End Cart Button-->
+                            <!--Quick View Button-->
+                            <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)"
+                                    data-toggle="modal" data-target="#content_quickview"><i
+                                        class="icon an an-search-l"></i> <span class="tooltip-label top">Quick
+                                        View</span></a></li>
+                            <!--End Quick View Button-->
+
+                        </ul>
+                    </div>
+                    <!--End Product Button-->
+                </div>
+                <!--End Product Image-->
+                <!--Start Product Details-->
+                <div class="product-details text-center">
+                    <!--Product Name-->
+                    <div class="product-name text-uppercase">
+                        <a href="/product/{{ lp.id }}/{{ lp.slug }}">{{ lp.title }}</a>
+                    </div>
+                    <!--End Product Name-->
+                    <!--Product Price-->
+                    <div class="product-price">
+                        <span>${{ lp.price }}</span>
+
+                    </div>
+                    <!--End Product Price-->
+
+
+                    <!-- Color Variant -->
+                    <ul class="swatches" id="colorpallate_{{lp.id}}_pl">
+
+                    </ul>
+                    <!-- End Variant -->
+
+
+
+                </div>
+                <!--End Product Details-->
+                <script type="text/javascript">
+                    $.ajax(
+                        {
+                            url: `/colors/{{lp.id}}`,
+                            method: "GET",
+                            headers: { "content_type": "application/json" },
+                            success: function (result) {
+                                result["Colors"].forEach((color, index) => {
+                                    if (document.getElementById(`licolor-also-{{lp.id}}-${index}`) == null) {
+                                        let liElement = document.createElement("li");
+                                        liElement.classList.add("swatch", "medium");
+                                        liElement.setAttribute("style", `background-color :${color}`);
+                                        liElement.setAttribute("id", `licolor-also-{{lp.id}}-${index}`);
+                                        document.getElementById("colorpallate_{{lp.id}}_pl").appendChild(liElement);
+                                    }
+                                })
+                            }
+                        });
+                </script>
+            </div>
+            {% endfor%}
+        </div>
+    </div>
+</section>

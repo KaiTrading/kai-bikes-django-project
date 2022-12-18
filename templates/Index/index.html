@@ -1,0 +1,88 @@
+{% extends 'Base/base.html' %} 
+{% load static %}
+{% block title %} Home - {{ setting.title }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block body %}
+
+<body class="template-index index-demo3">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." /></div>
+    <!-- End Page Loader -->
+
+    <!-- Organization Schema -->
+
+        <script type="application/ld+json">
+            {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "name": "Kai Bikes",
+            "url": "{{ setting.url }}",
+            "logo": "{{ setting.logo.url }}",
+            "contactPoint":[
+                {"@type":"ContactPoint",
+                "telephone":"+91-{{ setting.telephone }}",
+                "contactType":"customer service"}
+            ],
+            "address":{
+                "addressCountry":"{{ setting.addressCountry }}",
+                "postalCode":"{{ setting.postalCode }}",
+                "addressRegion":"{{ setting.addressRegion }}",
+                "addressLocality":"{{ setting.addressLocality }}"
+            }
+            "foundingDate": "2022",
+            "sameAs": [
+                "{{ setting.facebook }}",
+                "{{ setting.instagram }}",
+                "{{ setting.linkedin }}",
+                "{{ setting.twitter }}",
+                ]
+            }
+        </script>
+
+    <!-- End Schema -->
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+        {% include 'Header/header.html' %}
+        <!--Body Container-->
+        <div id="page-content">
+            {% include 'Index/includes/slider.html' %}
+
+            {% include 'Index/includes/latest-products.html' %}
+                    
+            {% include 'Index/includes/store-features.html' %}
+            
+            {% include 'Index/includes/popular-products.html' %}
+            
+            {% include 'Index/includes/bottem-banner.html' %}
+            
+            {% include 'Index/includes/blogs.html' %}
+            <!--End Body Container-->
+             {% include 'Footer/footer.html' %}
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-arw-up"></i></span>
+            <!--End Scoll Top-->
+
+            {% include 'Index/includes/minicart-drawer.html' %}
+            <!-- Including Jquery -->
+            <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+            <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+            <!--Including Javascript-->
+            <script src="{% static 'assets/js/plugins.js' %}"></script>
+            <script src="{% static 'assets/js/main.js' %}"></script>
+
+            {% block extra_js %}
+                
+            {% endblock extra_js %}
+                
+        </div>
+        <!--End Page Wrapper-->
+</body>
+
+
+
+{% endblock body %}
+
+
+

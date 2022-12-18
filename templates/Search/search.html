@@ -1,0 +1,837 @@
+{% extends 'Base/base.html' %} 
+{% load static %}
+{% block title %} {{ catdata.title }} - {{ setting.title }} {% endblock %}
+{% block body %}
+    <!--Body Container-->
+   
+    <body class="template-index index-demo3">
+        <!-- Page Loader -->
+        <div id="pre-loader"><img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." /></div>
+        <!-- End Page Loader -->
+    
+        <!--Page Wrapper-->
+        <div class="page-wrapper">
+            {% include 'Header/header.html' %}
+            <!--Body Container-->
+            <div id="page-content">
+                <div id="page-content">  
+                    <!-- Collection Banner -->
+                    <div class="collection-header">
+                        <div class="collection-hero large">
+                            <div class="collection-hero__image blur-up lazyload"></div>
+                            <div class="collection-hero__title-wrapper container">
+                                <h1 class="collection-hero__title medium">Shop Top Filter</h1>
+                                <div class="breadcrumbs text-uppercase mt-2"><a href="index.html" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">Shop Top Filter</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Collection Banner -->
+            
+                    <div class="container">
+                        <div class="row">
+                            <!--Main Content-->
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                                <!--Collection top filters-->
+                                <div class="collection-top-filters filterbar">
+                                    <div class="closeFilter d-block d-lg-none"><i class="icon icon an an-times-r"></i></div>
+                                    <div class="filters-toolbar-wrapper sidebar_tags m-0 d-flex flex-wrap align-items-center">
+                                        <label class="flby mb-3 m-lg-0">Filter By</label>
+                                        <form class="d-flex flex-wrap" action="#" method="post">
+                                            <div class="btn-group filterBox filter-widget ">
+                                                <button type="button" class="flTtl dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Color <span class="count-bubble text-center rounded-circle"></span></button>
+                                                <div class="filterDD dropdown-menu">
+                                                    <div class="bxTtl d-none d-lg-flex justify-content-between"><span class="selected">0 selected</span><a href="#" class="reset text-decoration-underline">Reset</a></div>
+                                                    <div class="filter-color swacth-list clearfix">
+                                                        <ul class="clearfix p-0 d-flex flex-wrap">
+                                                            <li><span class="swacth-btn medium rectangle black"></span><span class="tooltip-label">Black</span></li>
+                                                            <li><span class="swacth-btn medium rectangle white"></span><span class="tooltip-label">White</span></li>
+                                                            <li><span class="swacth-btn medium rectangle red"></span><span class="tooltip-label">Red</span></li>
+                                                            <li><span class="swacth-btn medium rectangle blue"></span><span class="tooltip-label">Blue</span></li>
+                                                            <li><span class="swacth-btn medium rectangle pink"></span><span class="tooltip-label">Pink</span></li>
+                                                            <li><span class="swacth-btn medium rectangle gray"></span><span class="tooltip-label">Gray</span></li>
+                                                            <li><span class="swacth-btn medium rectangle green"></span><span class="tooltip-label">Green</span></li>
+                                                            <li><span class="swacth-btn medium rectangle orange"></span><span class="tooltip-label">Orange</span></li>
+                                                            <li><span class="swacth-btn medium rectangle yellow"></span><span class="tooltip-label">Yellow</span></li>
+                                                            <li><span class="swacth-btn medium rectangle blueviolet"></span><span class="tooltip-label">Blue Violet</span></li>
+                                                            <li><span class="swacth-btn medium rectangle brown"></span><span class="tooltip-label">Brown</span></li>
+                                                            <li><span class="swacth-btn medium rectangle darkGoldenRod"></span><span class="tooltip-label">Dark Golden Red</span></li>
+                                                            <li><span class="swacth-btn medium rectangle darkGreen"></span><span class="tooltip-label">Dark Green</span></li>
+                                                            <li><span class="swacth-btn medium rectangle darkRed"></span><span class="tooltip-label">Dark Red</span></li>
+                                                            <li><span class="swacth-btn medium rectangle khaki"></span><span class="tooltip-label">Khaki</span></li>
+                                                            <li><span class="swacth-btn medium rectangle blue-red"></span><span class="tooltip-label">Blue/Red</span></li>
+                                                            <li><span class="swacth-btn medium rectangle black-grey"></span><span class="tooltip-label">Black/Grey</span></li>
+                                                            <li><span class="swacth-btn medium rectangle pink-black"></span><span class="tooltip-label">pink-Black</span></li>
+                                                            <li><span class="swacth-btn medium rectangle yellow-black"></span><span class="tooltip-label">Yellow</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group filterBox filter-widget size-swacthes">
+                                                <button type="button" class="flTtl dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Size<span class="count-bubble text-center rounded-circle"></span></button>
+                                                <div class="filterDD dropdown-menu">
+                                                    <div class="bxTtl d-none d-lg-flex justify-content-between">                                  
+                                                        <span class="selected">0 selected</span><a href="#" class="reset text-decoration-underline">Reset</a>                              
+                                                    </div>
+                                                    <div class="filter-size swacth-list clearfix">
+                                                        <ul class="clearfix">
+                                                            <li><input type="checkbox" value="s" id="s"><label for="s"><span></span>S</label></li>
+                                                            <li><input type="checkbox" value="m" id="m"><label for="m"><span></span>M</label></li>
+                                                            <li><input type="checkbox" value="l" id="l"><label for="l"><span></span>L</label></li>
+                                                            <li><input type="checkbox" value="x" id="x"><label for="x"><span></span>X</label></li>
+                                                            <li><input type="checkbox" value="xl" id="xl"><label for="xl"><span></span>XL</label></li>
+                                                            <li><input type="checkbox" value="xll" id="xll"><label for="xll"><span></span>XLL</label></li>
+                                                            <li><input type="checkbox" value="xxl" id="xxl"><label for="xxl"><span></span>XXL</label></li>
+                                                            <li><input type="checkbox" value="xs" id="xs"><label for="xs"><span></span>XS</label></li>
+                                                            <li><input type="checkbox" value="15" id="15"><label for="15"><span></span>15</label></li>
+                                                            <li><input type="checkbox" value="25" id="25"><label for="25"><span></span>25</label></li>
+                                                            <li><input type="checkbox" value="35" id="35"><label for="35"><span></span>35</label></li>
+                                                            <li><input type="checkbox" value="45" id="45"><label for="45"><span></span>45</label></li>
+                                                            <li><input type="checkbox" value="55" id="55"><label for="55"><span></span>55</label></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group filterBox filter-widget size-swacthes product-type">
+                                                <button type="button" class="flTtl dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Product type<span class="count-bubble text-center rounded-circle"></span></button>
+                                                <div class="filterDD dropdown-menu">
+                                                    <div class="bxTtl d-none d-lg-flex justify-content-between">                                  
+                                                        <span class="selected">0 selected</span><a href="#" class="reset text-decoration-underline">Reset</a>                              
+                                                    </div>
+                                                    <div class="filter-size swacth-list clearfix">
+                                                        <ul class="clearfix">
+                                                            <li><input type="checkbox" value="accessories" id="accessories"><label for="accessories"><span></span>Accessories </label></li>
+                                                            <li><input type="checkbox" value="bags" id="bags"><label for="bags"><span></span>Bags</label></li>
+                                                            <li><input type="checkbox" value="jeans" id="jeans"><label for="jeans"><span></span>Jeans</label></li>
+                                                            <li><input type="checkbox" value="shoes" id="shoes"><label for="shoes"><span></span>Shoes</label></li>
+                                                            <li><input type="checkbox" value="t-shirts" id="t-shirts"><label for="t-shirts"><span></span>T-shirts</label></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group filterBox filter-widget size-swacthes brand-filter">
+                                                <button type="button" class="flTtl dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Brands<span class="count-bubble text-center rounded-circle"></span></button>
+                                                <div class="filterDD dropdown-menu">
+                                                    <div class="bxTtl d-none d-lg-flex justify-content-between">                                  
+                                                        <span class="selected">0 selected</span><a href="#" class="reset text-decoration-underline">Reset</a>                              
+                                                    </div>
+                                                    <div class="filter-size swacth-list clearfix">
+                                                        <ul class="clearfix">
+                                                            <li><input type="checkbox" value="adidas" id="adidas"><label for="adidas"><span></span>Adidas</label></li>
+                                                            <li><input type="checkbox" value="baggit" id="baggit"><label for="baggit"><span></span>Baggit</label></li>
+                                                            <li><input type="checkbox" value="campus" id="campus"><label for="campus"><span></span>Campus</label></li>
+                                                            <li><input type="checkbox" value="caprese" id="caprese"><label for="caprese"><span></span>Caprese</label></li>
+                                                            <li><input type="checkbox" value="elle" id="elle"><label for="elle"><span></span>Elle</label></li>
+                                                            <li><input type="checkbox" value="diva" id="diva"><label for="diva"><span></span>Diva</label></li>
+                                                            <li><input type="checkbox" value="optimal" id="optimal"><label for="optimal"><span></span>Optimal</label></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group filterBox filter-widget size-swacthes availability">
+                                                <button type="button" class="flTtl dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Availability<span class="count-bubble text-center rounded-circle"></span></button>
+                                                <div class="filterDD dropdown-menu">
+                                                    <div class="bxTtl d-none d-lg-flex justify-content-between">                                  
+                                                        <span class="selected">0 selected</span><a href="#" class="reset text-decoration-underline">Reset</a>                              
+                                                    </div>
+                                                    <div class="filter-size swacth-list clearfix">
+                                                        <ul class="clearfix">
+                                                            <li><input type="checkbox" value="instock" id="instock"><label for="instock"><span></span>In stock</label></li>
+                                                            <li><input type="checkbox" value="outofstock" id="outofstock"><label for="outofstock"><span></span>Out of stock</label></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group filterBox filter-widget size-swacthes">
+                                                <button type="button" class="flTtl dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Price<span class="count-bubble text-center rounded-circle"></span></button>
+                                                <div class="filterDD dropdown-menu">
+                                                    <div class="bxTtl d-none d-lg-flex justify-content-between">                                  
+                                                        <span class="selected">The highest price is $599.00</span><a href="#" class="reset text-decoration-underline">Reset</a>                              
+                                                    </div>
+                                                    <div class="filter-size swacth-list clearfix">
+                                                        <div class="price-filter">
+                                                            <div id="slider-range"></div>
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <p class="no-margin"><input id="amount" type="text"></p>
+                                                                </div>
+                                                                <div class="col-6 text-right margin-25px-top">
+                                                                    <button class="btn btn--small rounded">filter</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="filters-toolbar__item filters-sort d-none d-lg-flex align-items-center ms-auto">
+                                            <label for="SortBy" class="text-nowrap mb-0 me-2">Sort by:</label>
+                                            <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort border-0 bg-transparent">
+                                                <option value="featured" selected="selected">Featured</option>
+                                                <option value="best-selling">Best selling</option>
+                                                <option value="title-ascending">Alphabetically, A-Z</option>
+                                                <option value="title-descending">Alphabetically, Z-A</option>
+                                                <option value="price-ascending">Price, low to high</option>
+                                                <option value="price-descending">Price, high to low</option>
+                                                <option value="created-ascending">Date, old to new</option>
+                                                <option value="created-descending">Date, new to old</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Collection top filters-->
+            
+                                <!--Active Filters-->
+                                <ul class="active-filters d-flex flex-wrap align-items-center m-0 list-unstyled d-none">
+                                    <li><a href="#">Clear all</a></li>
+                                    <li><a href="#">Men <i class="an an-times-l"></i></a></li>
+                                    <li><a href="#">Neckalses <i class="an an-times-l"></i></a></li>
+                                    <li><a href="#">Accessories <i class="an an-times-l"></i></a></li>
+                                </ul>
+                                <!--End Active Filters-->
+                                <!--Toolbar-->
+                                <div class="toolbar mt-0">
+                                    <div class="filters-toolbar-wrapper">
+                                        <ul class="list-unstyled d-flex align-items-center">
+                                            <li class="product-count d-flex align-items-center">
+                                                <button type="button" class="btn btn-filter an an-slider-3 d-inline-flex d-lg-none me-2 me-sm-3"><span class="hidden">Filter</span></button>
+                                                <div class="filters-toolbar__item">
+                                                    <span class="filters-toolbar__product-count d-none d-sm-block">Showing: 21 products</span>
+                                                </div>
+                                            </li>
+                                            <li class="collection-view ms-sm-auto">
+                                                <div class="filters-toolbar__item collection-view-as d-flex align-items-center me-3 me-lg-0">
+                                                    <a href="javascript:void(0)" class="change-view prd-grid change-view--active"><i class="icon an an-th" aria-hidden="true"></i><span class="tooltip-label">Grid View</span></a>
+                                                    <a href="javascript:void(0)" class="change-view prd-list"><i class="icon an an-th-list" aria-hidden="true"></i><span class="tooltip-label">List View</span></a>
+                                                </div>
+                                            </li>
+                                            <li class="filters-sort ms-auto ms-sm-0 d-lg-none">
+                                                <div class="filters-toolbar__item">
+                                                    <label for="SortBy2" class="hidden">Sort by:</label>
+                                                    <select name="SortBy2" id="SortBy2" class="filters-toolbar__input filters-toolbar__input--sort">
+                                                        <option value="featured" selected="selected">Featured</option>
+                                                        <option value="best-selling">Best selling</option>
+                                                        <option value="title-ascending">Alphabetically, A-Z</option>
+                                                        <option value="title-descending">Alphabetically, Z-A</option>
+                                                        <option value="price-ascending">Price, low to high</option>
+                                                        <option value="price-descending">Price, high to low</option>
+                                                        <option value="created-ascending">Date, old to new</option>
+                                                        <option value="created-descending">Date, new to old</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--End Toolbar-->
+            
+                                <!--Product List-->
+                                <div class="product-load-more">
+                                    <!--Product Grid-->
+                                    <div class="grid-products grid--view-items prd-grid">
+                                        <div class="row">
+                                            {% for lp in products %}
+                                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                                <!--Start Product Image-->
+                                                <div class="product-image">
+                                                    <!--Start Product Image-->
+                                                    <a href="/product/{{ lp.id }}/{{ lp.slug }}" class="product-img">
+                                                        <!-- image -->
+                                                        <img class="primary blur-up lazyload" data-src="{{ lp.image.url }}" alt="{{ lp.title }}" title="{{ lp.title }}">
+                                                        <!-- End image -->
+                                                        <!-- Hover image -->
+                                                        <img class="hover blur-up lazyload" data-src="{{ lp.image.url }}" src="{{ lp.image.url }}" alt="{{ lp.title }}" title="{{ lp.title }}">
+                                                        <!-- End hover image -->
+                                                        <!-- product label -->
+                                                        <div class="product-labels"><span class="lbl on-sale rounded">Sale</span></div>
+                                                        <!-- End product label -->
+                                                    </a>
+                                                    <!--End Product Image-->
+            
+                                                    <!--Product Button-->
+                                                    <div class="button-set style0 d-none d-md-block">
+                                                        <ul>
+                                                            <!--Cart Button-->
+                                                            <li><a class="btn-icon btn cartIcon pro-quickshop-popup" href="#pro-quickshop1" data-bs-toggle="offcanvas" data-bs-target="#pro-quickshop1" aria-controls="pro-quickshop1"><i class="icon an an-cart-l"></i> <span class="tooltip-label top">Quick Shop</span></a></li>
+                                                            <!--End Cart Button-->
+                                        
+                                                        </ul>
+                                                    </div>
+                                                    <!--End Product Button-->  
+            
+                                                    <!-- Product Quickshop Form -->
+                                                    <div class="quickshop-content d-flex-center" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="pro-quickshop1">
+                                                        <button type="button" class="btn-close text-reset ms-auto position-absolute top-0 end-0 m-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                        <div class="offcanvas-body quickshop-variant h-100 d-flex align-items-start align-items-sm-center">
+                                                            <form method="post" action="#" id="product_form_1052" class="product-form align-items-center text-center hidedropdown" accept-charset="UTF-8" enctype="multipart/form-data">
+                                                                <!-- Product Price -->
+                                                                <div class="product-single__price lh-1 mb-3 mt-0 mx-auto">
+                                                                    <span class="visually-hidden">Regular price</span>
+                                                                    <span class="product-price__sale--single">
+                                                                        <span class="product-price-old-price d-none">$200.00</span><span class="product-price__price product-price__sale0">$199.00</span>   
+                                                                    </span>
+                                                                </div>
+                                                                <!-- End Product Price -->
+                                                                <!-- Swatches Color -->
+                                                                <div class="swatches-image swatch clearfix mb-3 swatch-0 option1" data-option-index="0">
+                                                                    <div class="product-form__item">
+                                                                        <label class="label d-flex justify-content-center">Color:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">Black</span></label>
+                                                                        <ul class="swatches d-flex-justify-center list-unstyled m-0 clearfix">
+                                                                            <li class="swatch-element rounded-0 color gray available active">
+                                                                                <label class="swatchLbl rounded-0 color small gray" title="Gray"></label>
+                                                                                <span class="tooltip-label top">Gray</span>
+                                                                            </li>
+                                                                            <li data-value="Peach" class="swatch-element rounded-0 color orange available">
+                                                                                <label class="swatchLbl rounded-0 color small orange" title="Orange"></label>
+                                                                                <span class="tooltip-label top">Orange</span>
+                                                                            </li>
+                                                                            <li data-value="White" class="swatch-element rounded-0 color brown available">
+                                                                                <label class="swatchLbl rounded-0 color small brown" title="Brown"></label>
+                                                                                <span class="tooltip-label top">Brown</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- End Swatches Color -->
+                                                                <!-- Swatches Size -->
+                                                                <div class="swatch clearfix mb-3 swatch-1 option2" data-option-index="1">
+                                                                    <div class="product-form__item">
+                                                                        <label class="label d-flex justify-content-center">Size:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">S</span></label>
+                                                                        <ul class="swatches-size d-flex-justify-center list-unstyled m-0 clearfix">
+                                                                            <li data-value="S" class="swatch-element s available active">
+                                                                                <label class="swatchLbl rounded-0 medium" title="S">S</label><span class="tooltip-label">S</span>
+                                                                            </li>
+                                                                            <li data-value="M" class="swatch-element m available">
+                                                                                <label class="swatchLbl rounded-0 medium" title="M">M</label><span class="tooltip-label">M</span>
+                                                                            </li>
+                                                                            <li data-value="L" class="swatch-element l available">
+                                                                                <label class="swatchLbl rounded-0 medium" title="L">L</label><span class="tooltip-label">L</span>
+                                                                            </li>
+                                                                            <li data-value="XL" class="swatch-element xl available">
+                                                                                <label class="swatchLbl rounded-0 medium" title="XL">XL</label><span class="tooltip-label">XL</span>
+                                                                            </li>
+                                                                            <li data-value="XS" class="swatch-element xs soldout">
+                                                                                <label class="swatchLbl rounded-0 medium" title="XS">XS</label><span class="tooltip-label">XS</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- End Swatches Size -->
+                                                                <!-- Product Action -->
+                                                                <div class="product-form-submit mx-auto">
+                                                                    <button type="submit" name="add" class="btn rounded product-form__cart-submit btn-small px-3"><span>Add to cart</span></button>
+                                                                    <button type="submit" name="add" class="btn rounded product-form__sold-out btn-small px-3 d-none" disabled="disabled">Sold out</button>
+                                                                    <button type="button" name="buy" class="btn rounded btn-outline-primary proceed-to-checkout btn-small px-3 d-none">Buy it now</button>
+                                                                </div>
+                                                                <!-- End Product Action -->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Product Quickshop Form --> 
+                                                </div>
+                                                <!--End Product Image-->
+                                                <!--Start Product Details-->
+                                                <div class="product-details text-center">
+                                                    <!--Product Name-->
+                                                    <div class="product-name text-uppercase">
+                                                        <a href="/product/{{ lp.id }}/{{ lp.slug }}">{{ lp.title }}</a>
+                                                    </div>
+                                                    <!--End Product Name-->
+                                                    <!--Product Price-->
+                                                    <div class="product-price">
+                                                        <span class="price">${{ lp.price }}</span>
+                                                    </div>
+                                                    <!--End Product Price-->
+                                                    <!--Product Review-->
+                                                    <div class="product-review d-flex align-items-center justify-content-center">
+                                                        <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i>
+                                                        <span class="caption hidden ms-2">8 reviews</span>
+                                                    </div>
+                                                    <!--End Product Review-->
+                                                    <!--Sort Description-->
+                                                    <p class="hidden sort-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s specimen book...</p>
+                                                    <!--End Sort Description-->
+                                                    <!--Color Variant-->
+                                                    <ul class="swatches">
+                                                        <li class="swatch medium radius black"><span class="tooltip-label">Black</span></li>
+                                                        <li class="swatch medium radius navy"><span class="tooltip-label">Navy</span></li>
+                                                        <li class="swatch medium radius purple"><span class="tooltip-label">Purple</span></li>
+                                                    </ul>
+                                                    <!--End Color Variant-->
+                                                    <!-- Product Button -->
+                                                    <div class="button-action d-flex">
+                                                        <div class="addtocart-btn">
+                                                            <form class="addtocart" action="#" method="post">
+                                                                <a class="btn pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon hidden an an-cart-l"></i>Select Options</a>
+                                                            </form>
+                                                        </div>
+                                                        <div class="quickview-btn">
+                                                            <a class="btn btn-icon quick-view quick-view-popup" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label top">Quick View</span></a>
+                                                        </div>
+                                                        <div class="wishlist-btn">
+                                                            <a class="btn btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label top">Add To Wishlist</span></a>
+                                                        </div>
+                                                        <div class="compare-btn">
+                                                            <a class="btn btn-icon compare add-to-compare" href="compare.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label top">Add to Compare</span></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Product Button -->
+                                                </div>
+                                                <!--End Product Details-->
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <!--End Product Grid-->
+            
+                                    <!--Load More Button-->
+                                    <div class="infinitpaginOuter">
+                                        <div class="infinitpagin">	
+                                            <a href="#" class="btn rounded loadMore">Load More</a>
+                                        </div>
+                                    </div>
+                                    <!--End Load More Button-->
+                                </div>
+                                <!--End Product List-->
+            
+                                <!--Collection Description-->
+                                <div class="collection-description mt-4 pt-2">
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard reader dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen the book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                </div>
+                                <!--End Collection Description-->
+                            </div>
+                            <!--End Main Content-->
+                        </div>
+                    </div>
+                </div>
+            
+                <!--End Body Container-->
+            {% include 'Footer/footer.html' %}
+                <!--Scoll Top-->
+                <span id="site-scroll"><i class="icon an an-arw-up"></i></span>
+                <!--End Scoll Top-->
+    
+          
+                <div class="modalOverly"></div>
+    
+                <!--Quickview Popup-->
+                <div class="loadingBox">
+                    <div class="an-spin"><i class="icon an an-spinner4"></i></div>
+                </div>
+                <div id="quickView-modal" class="mfp-with-anim mfp-hide">
+                    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 mb-3 mb-md-0">
+                            <!--Model thumbnail -->
+                            <div id="quickView" class="carousel slide">
+                                <!-- Image Slide carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="item carousel-item active" data-bs-slide-number="0">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1.jpg"
+                                            src="assets/images/products/product-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="item carousel-item" data-bs-slide-number="1">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                            src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="item carousel-item" data-bs-slide-number="2">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                            src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="item carousel-item" data-bs-slide-number="3">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                            src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="item carousel-item" data-bs-slide-number="4">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                            src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                </div>
+                                <!-- End Image Slide carousel items -->
+                                <!-- Thumbnail image -->
+                                <div class="model-thumbnail-img">
+                                    <!-- Thumbnail slide -->
+                                    <div class="carousel-indicators list-inline">
+                                        <div class="list-inline-item active" id="carousel-selector-0" data-bs-slide-to="0"
+                                            data-bs-target="#quickView">
+                                            <img class="blur-up lazyload" data-src="assets/images/products/product-1.jpg"
+                                                src="assets/images/products/product-1.jpg" alt="image" title="" />
+                                        </div>
+                                        <div class="list-inline-item" id="carousel-selector-1" data-bs-slide-to="1"
+                                            data-bs-target="#quickView">
+                                            <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                                src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                        </div>
+                                        <div class="list-inline-item" id="carousel-selector-2" data-bs-slide-to="2"
+                                            data-bs-target="#quickView">
+                                            <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                                src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                        </div>
+                                        <div class="list-inline-item" id="carousel-selector-3" data-bs-slide-to="3"
+                                            data-bs-target="#quickView">
+                                            <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                                src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                        </div>
+                                        <div class="list-inline-item" id="carousel-selector-4" data-bs-slide-to="4"
+                                            data-bs-target="#quickView">
+                                            <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg"
+                                                src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                        </div>
+                                    </div>
+                                    <!-- End Thumbnail slide -->
+                                    <!-- Carousel arrow button -->
+                                    <a class="carousel-control-prev carousel-arrow" href="#quickView"
+                                        data-bs-target="#quickView" data-bs-slide="prev"><i
+                                            class="icon an-3x an an-angle-left"></i><span
+                                            class="visually-hidden">Previous</span></a>
+                                    <a class="carousel-control-next carousel-arrow" href="#quickView"
+                                        data-bs-target="#quickView" data-bs-slide="next"><i
+                                            class="icon an-3x an an-angle-right"></i><span
+                                            class="visually-hidden">Next</span></a>
+                                    <!-- End Carousel arrow button -->
+                                </div>
+                                <!-- End Thumbnail image -->
+                            </div>
+                            <!--End Model thumbnail -->
+                            <div class="text-center mt-3"><a href="product-layout1.html">VIEW MORE DETAILS</a></div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                            <h2 class="product-title">Product Quick View Popup</h2>
+                            <div class="product-review d-flex-center mb-2">
+                                <div class="rating"><i class="icon an an-star"></i><i class="icon an an-star"></i><i
+                                        class="icon an an-star"></i><i class="icon an an-star"></i><i
+                                        class="icon an an-star-o"></i></div>
+                                <div class="reviews ms-2"><a href="#">5 Reviews</a></div>
+                            </div>
+                            <div class="product-info">
+                                <p class="product-vendor">Vendor: <span class="fw-normal"><a href="#"
+                                            class="fw-normal">Optimal</a></span></p>
+                                <p class="product-type">Product Type: <span class="fw-normal">Tops</span></p>
+                                <p class="product-sku">SKU: <span class="fw-normal">50-ABC</span></p>
+                            </div>
+                            <div class="pro-stockLbl my-2">
+                                <span class="d-flex-center stockLbl instock"><i class="icon an an-check-cil"></i><span> In
+                                        stock</span></span>
+                                <span class="d-flex-center stockLbl preorder d-none"><i
+                                        class="icon an an-clock-r"></i><span> Pre-order Now</span></span>
+                                <span class="d-flex-center stockLbl outstock d-none"><i class="icon an an-times-cil"></i>
+                                    <span>Sold out</span></span>
+                                <span class="d-flex-center stockLbl lowstock d-none" data-qty="15"><i
+                                        class="icon an an-exclamation-cir"></i><span> Order now, Only <span
+                                            class="items">10</span> left!</span></span>
+                            </div>
+                            <div class="pricebox">
+                                <span class="price old-price">$400.00</span><span
+                                    class="price product-price__sale">$300.00</span>
+                            </div>
+                            <div class="sort-description">Optimal Multipurpose Bootstrap 5 Html Template that will give you
+                                and your customers a smooth shopping experience which can be used for various kinds of
+                                stores such as fashion.. </div>
+                            <form method="post" action="#" id="product_form--option" class="product-form">
+                                <div class="product-options d-flex-wrap">
+                                    <div class="swatch clearfix swatch-0 option1">
+                                        <div class="product-form__item">
+                                            <label class="label d-flex">Color:<span class="required d-none">*</span> <span
+                                                    class="slVariant ms-1 fw-bold">Black</span></label>
+                                            <ul class="swatches-image swatches d-flex-wrap list-unstyled clearfix">
+                                                <li data-value="Black" class="swatch-element color available active">
+                                                    <label class="rounded-0 swatchLbl small color black"
+                                                        title="Black"></label>
+                                                    <span class="tooltip-label top">Black</span>
+                                                </li>
+                                                <li data-value="Green" class="swatch-element color available">
+                                                    <label class="rounded-0 swatchLbl small color green"
+                                                        title="Green"></label>
+                                                    <span class="tooltip-label top">Green</span>
+                                                </li>
+                                                <li data-value="Orange" class="swatch-element color available">
+                                                    <label class="rounded-0 swatchLbl small color orange"
+                                                        title="Orange"></label>
+                                                    <span class="tooltip-label top">Orange</span>
+                                                </li>
+                                                <li data-value="Blue" class="swatch-element color available">
+                                                    <label class="rounded-0 swatchLbl small color blue"
+                                                        title="Blue"></label>
+                                                    <span class="tooltip-label top">Blue</span>
+                                                </li>
+                                                <li data-value="Red" class="swatch-element color available">
+                                                    <label class="rounded-0 swatchLbl small color red" title="Red"></label>
+                                                    <span class="tooltip-label top">Red</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="swatch clearfix swatch-1 option2">
+                                        <div class="product-form__item">
+                                            <label class="label">Size:<span class="required d-none">*</span> <span
+                                                    class="slVariant ms-1 fw-bold">XS</span></label>
+                                            <ul class="swatches-size d-flex-center list-unstyled clearfix swatch-1 option2">
+                                                <li data-value="XS" class="swatch-element xs available active">
+                                                    <label class="swatchLbl rounded-0 medium" title="XS">XS</label>
+                                                    <span class="tooltip-label">XS</span>
+                                                </li>
+                                                <li data-value="S" class="swatch-element s available">
+                                                    <label class="swatchLbl rounded-0 medium" title="S">S</label>
+                                                    <span class="tooltip-label">S</span>
+                                                </li>
+                                                <li data-value="M" class="swatch-element m available">
+                                                    <label class="swatchLbl rounded-0 medium" title="M">M</label>
+                                                    <span class="tooltip-label">M</span>
+                                                </li>
+                                                <li data-value="L" class="swatch-element l available">
+                                                    <label class="swatchLbl rounded-0 medium" title="L">L</label>
+                                                    <span class="tooltip-label">L</span>
+                                                </li>
+                                                <li data-value="XL" class="swatch-element xl available">
+                                                    <label class="swatchLbl rounded-0 medium" title="XL">XL</label>
+                                                    <span class="tooltip-label">XL</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-action d-flex-wrap w-100 mb-3 clearfix">
+                                        <div class="quantity">
+                                            <div class="qtyField rounded">
+                                                <a class="qtyBtn minus" href="javascript:void(0);"><i
+                                                        class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                <input type="text" name="quantity" value="1"
+                                                    class="product-form__input qty rounded-0">
+                                                <a class="qtyBtn plus" href="javascript:void(0);"><i
+                                                        class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart ms-3 fl-1">
+                                            <button type="button" class="btn button-cart rounded-0"><span>Add to
+                                                    cart</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="wishlist-btn d-flex-center">
+                                <a class="add-wishlist d-flex-center text-uppercase me-3" href="my-wishlist.html"
+                                    title="Add to Wishlist"><i class="icon an an-heart-l me-1"></i> <span>Add to
+                                        Wishlist</span></a>
+                                <a class="add-compare d-flex-center text-uppercase" href="compare-style1.html"
+                                    title="Add to Compare"><i class="icon an an-random-r me-2"></i> <span>Add to
+                                        Compare</span></a>
+                            </div>
+                            <!-- Social Sharing -->
+                            <div class="social-sharing share-icon d-flex-center mx-0 mt-3">
+                                <span class="sharing-lbl me-2">Share :</span>
+                                <a href="#" class="d-flex-center btn btn-link btn--share share-facebook"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Facebook"><i
+                                        class="icon an an-facebook mx-1"></i><span
+                                        class="share-title d-none">Facebook</span></a>
+                                <a href="#" class="d-flex-center btn btn-link btn--share share-twitter"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Tweet on Twitter"><i
+                                        class="icon an an-twitter mx-1"></i><span
+                                        class="share-title d-none">Tweet</span></a>
+                                <a href="#" class="d-flex-center btn btn-link btn--share share-pinterest"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Pin on Pinterest"><i
+                                        class="icon an an-pinterest-p mx-1"></i> <span class="share-title d-none">Pin
+                                        it</span></a>
+                                <a href="#" class="d-flex-center btn btn-link btn--share share-linkedin"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Instagram"><i
+                                        class="icon an an-instagram mx-1"></i><span
+                                        class="share-title d-none">Instagram</span></a>
+                                <a href="#" class="d-flex-center btn btn-link btn--share share-whatsapp"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Share on WhatsApp"><i
+                                        class="icon an an-whatsapp mx-1"></i><span
+                                        class="share-title d-none">WhatsApp</span></a>
+                                <a href="#" class="d-flex-center btn btn-link btn--share share-email"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Share by Email"><i
+                                        class="icon an an-envelope-l mx-1"></i><span
+                                        class="share-title d-none">Email</span></a>
+                            </div>
+                            <!-- End Social Sharing -->
+                        </div>
+                    </div>
+                </div>
+                <!--End Quickview Popup-->
+    
+                <!--Size Chart-->
+                <div id="sizechart" class="mfpbox mfp-with-anim mfp-hide">
+                    <h4 class="fw-bold">Size Guide</h4>
+                    <p class="text-center">This is a standardised guide to give you an idea of what size you will need,
+                        however some brands may vary from these conversions.</p>
+                    <p><strong>Ready to Wear Clothing</strong></p>
+                    <div class="table-responsive px-1">
+                        <table class="table table-bordered align-middle">
+                            <tbody>
+                                <tr>
+                                    <th>Size</th>
+                                    <th>XXS - XS</th>
+                                    <th>XS - S</th>
+                                    <th>S - M</th>
+                                    <th>M - L</th>
+                                    <th>L - XL</th>
+                                    <th>XL - XXL</th>
+                                </tr>
+                                <tr>
+                                    <td>UK</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>10</td>
+                                    <td>12</td>
+                                    <td>14</td>
+                                    <td>16</td>
+                                </tr>
+                                <tr>
+                                    <td>US</td>
+                                    <td>2</td>
+                                    <td>4</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>10</td>
+                                    <td>12</td>
+                                </tr>
+                                <tr>
+                                    <td>Italy (IT)</td>
+                                    <td>38</td>
+                                    <td>40</td>
+                                    <td>42</td>
+                                    <td>44</td>
+                                    <td>46</td>
+                                    <td>48</td>
+                                </tr>
+                                <tr>
+                                    <td>France (FR/EU)</td>
+                                    <td>34</td>
+                                    <td>36</td>
+                                    <td>38</td>
+                                    <td>40</td>
+                                    <td>42</td>
+                                    <td>44</td>
+                                </tr>
+                                <tr>
+                                    <td>Denmark</td>
+                                    <td>32</td>
+                                    <td>34</td>
+                                    <td>36</td>
+                                    <td>38</td>
+                                    <td>40</td>
+                                    <td>42</td>
+                                </tr>
+                                <tr>
+                                    <td>Russia</td>
+                                    <td>40</td>
+                                    <td>42</td>
+                                    <td>44</td>
+                                    <td>46</td>
+                                    <td>48</td>
+                                    <td>50</td>
+                                </tr>
+                                <tr>
+                                    <td>Germany</td>
+                                    <td>32</td>
+                                    <td>34</td>
+                                    <td>36</td>
+                                    <td>38</td>
+                                    <td>40</td>
+                                    <td>42</td>
+                                </tr>
+                                <tr>
+                                    <td>Japan</td>
+                                    <td>5</td>
+                                    <td>7</td>
+                                    <td>9</td>
+                                    <td>11</td>
+                                    <td>13</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Australia</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>10</td>
+                                    <td>12</td>
+                                    <td>14</td>
+                                    <td>16</td>
+                                </tr>
+                                <tr>
+                                    <td>Korea</td>
+                                    <td>33</td>
+                                    <td>44</td>
+                                    <td>55</td>
+                                    <td>66</td>
+                                    <td>77</td>
+                                    <td>88</td>
+                                </tr>
+                                <tr>
+                                    <td>China</td>
+                                    <td>160/84</td>
+                                    <td>165/86</td>
+                                    <td>170/88</td>
+                                    <td>175/90</td>
+                                    <td>180/92</td>
+                                    <td>185/94</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Jeans</strong></td>
+                                    <td>24-25</td>
+                                    <td>26-27</td>
+                                    <td>27-28</td>
+                                    <td>29-30</td>
+                                    <td>31-32</td>
+                                    <td>32-33</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                </div>
+                <!--End Size Chart-->
+    
+                <!--Addtocart Added Popup-->
+                <div id="pro-addtocart-popup" class="mfp-with-anim mfp-hide">
+                    <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                    <div class="addtocart-inner text-center clearfix">
+                        <h4 class="title mb-3 text-success">Added to your shopping cart successfully.</h4>
+                        <div class="pro-img mb-3">
+                            <img class="img-fluid blur-up lazyload" src="assets/images/products/add-to-cart-popup.jpg"
+                                data-src="assets/images/products/add-to-cart-popup.jpg"
+                                alt="Added to your shopping cart successfully."
+                                title="Added to your shopping cart successfully." />
+                        </div>
+                        <div class="pro-details">
+                            <h5 class="pro-name mb-0">Ditsy Floral Dress</h5>
+                            <p class="sku my-2">Color: Gray</p>
+                            <p class="mb-0 qty-total">1 X $113.88</p>
+                            <div class="addcart-total bg-light mt-3 mb-3 p-2">
+                                Total: <b class="price">$113.88</b>
+                            </div>
+                            <div class="button-action">
+                                <a href="checkout-style1.html" class="btn btn-primary view-cart mx-1 rounded-0">Go To
+                                    Checkout</a>
+                                <a href="index.html" class="btn rounded-0">Continue Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Addtocart Added Popup-->
+    
+                
+    
+                    
+    
+        {% include 'Index/includes/minicart-drawer.html' %}
+                <!-- Including Jquery -->
+                <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+                <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+                <!--Including Javascript-->
+                <script src="{% static 'assets/js/plugins.js' %}"></script>
+                <script src="{% static 'assets/js/main.js' %}"></script>
+    
+               
+                
+                {% block extra_js %}
+                    
+                {% endblock extra_js %}
+                    
+            </div>
+            <!--End Page Wrapper-->
+    </body>
+    
+
+    
+    <!--End Body Container-->
+{% endblock body %}

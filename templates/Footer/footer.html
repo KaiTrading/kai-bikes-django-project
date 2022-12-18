@@ -1,0 +1,85 @@
+{% load static %}
+<!--Footer-->
+<div class="footer footer-3">
+  <div class="footer-top clearfix">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-3 col-lg-2 footer-links">
+          <h4 class="h4">Informations</h4>
+          <ul>
+            {% for lp in f1 %}
+            <li><a href="{{lp.link}}">{{lp.link_text}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div
+          class="col-12 col-sm-12 col-md-6 col-lg-8 text-center about-col px-lg-5"
+        >
+          <img
+            src="{{ setting.logo.url }}"
+            alt="{{ setting.title }}"
+            class="mb-4"
+          />
+          <p>{{ setting.description }}</p>
+          <p>
+            <b>Got Question? Call Us 24/7</b> <br />+91 {{ setting.telephone }}
+          </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-3 col-lg-2 social-icons-col">
+          <h4 class="h4">Stay Connected</h4>
+          <ul class="d-flex flex-column">
+            <li>
+              <a class="d-flex-center" href="https://api.whatsapp.com/send/?phone=+917043464986&text=Hello%2C+I+am+from+your+website."
+                ><i class="an an-whatsapp" aria-hidden="true"></i
+                ><span>Whatsapp</span></a
+              >
+            </li>
+            <li>
+              <a class="d-flex-center" href="{{ setting.facebook }}"
+                ><i class="an an-facebook" aria-hidden="true"></i
+                ><span>Facebook</span></a
+              >
+            </li>
+            <li>
+              <a class="d-flex-center" href="{{ setting.twitter }}"
+                ><i class="an an-twitter" aria-hidden="true"></i
+                ><span>Twitter</span></a
+              >
+            </li>
+            <li>
+              <a class="d-flex-center" href="{{ setting.instagram }}"
+                ><i class="an an-instagram" aria-hidden="true"></i
+                ><span>Instagram</span></a
+              >
+            </li>
+            <li>
+              <a class="d-flex-center" href="{{ setting.instagram }}"
+                ><i class="an an-linkedin" aria-hidden="true"></i
+                ><span>Linkedin</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom clearfix">
+    <div class="container">
+      <div
+        class="d-flex-center flex-column justify-content-md-between flex-md-row-reverse"
+      >
+        <img
+          src="{% static 'assets/images/payment.png' %}"
+          alt="{{ setting.title }}"
+        />
+        <div class="copytext">
+          &copy; 2022
+          <a href="{{ setting.url }}" class="author_link text-white"
+            >Kai Bikes</a
+          >. All Rights Reserved.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Footer-->

@@ -1,0 +1,330 @@
+{% extends 'Base/base.html' %} {% load static %} 
+{% block title %} Checkout - {{ setting.title }} {% endblock %}
+{% block body %}
+              
+<body class="template-product product-simple-layout">
+  <!-- Page Loader -->
+  <div id="pre-loader"><img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." /></div>
+  <!-- End Page Loader -->
+
+  <!--Page Wrapper-->
+  <div class="page-wrapper">
+      {% include 'Header/header.html' %}
+      <!--Body Container-->
+      <!--Body Container-->
+      <div id="page-content">   
+        <!--Collection Banner-->
+        <div class="collection-header">
+            <div class="collection-hero">
+                <div class="collection-hero__image"></div>
+                <div class="collection-hero__title-wrapper container">
+                    <h1 class="collection-hero__title">Checkout</h1>
+                    <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="/" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">Checkout</span></div>
+                </div>
+            </div>
+        </div>
+        <!--End Collection Banner-->
+
+        <!--Main Content-->
+        <div class="container">
+            <form class="checkout-form"  method="POST" id="orderform">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12 col-lg-4 mt-2 mt-lg-0">
+                        <h2 class="title fs-6">ORDER SUMMARY</h2>
+                        <div class="table-responsive order-table style1"> 
+                            <table class="table table-bordered align-middle table-hover text-center mb-1">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th class="text-start">Name</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cartData">
+                                    
+                                </tbody>
+                                <tfoot class="font-weight-600">
+                                    <tr>
+                                        <td colspan="4" class="text-end fw-bolder" >Total</td>
+                                        <td class="fw-bolder" id="total"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                       
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card--grey">
+                            <div class="card-body">
+                                <h2 class="fs-6">SHIPPING ADDRESS</h2>
+                                <label class="text-uppercase d-none">Full Name</label>
+                                <div class="form-group"><input type="text" name="full_name" placeholder="Full Name" class="form-control"></div>
+                                <input name="productId" type="hidden" id="productId" value="data" />
+
+                                <label class="text-uppercase d-none">Mobile Numer</label>
+                                <div class="form-group"><input type="text" name="phone" placeholder="Mobile Number" class="form-control"></div>
+
+                                <label class="text-uppercase d-none">E-Mail Address </label>
+                                <div class="form-group"><input name="email" type="email" placeholder="E-Mail Address" class="form-control"></div>
+
+
+
+                                <label class="text-uppercase d-none">Address </label>
+                                <div class="form-group"><textarea name="address" name="city" type="text" rows="3" placeholder="Address" class="form-control"></textarea></div>
+
+        
+                                <label class="text-uppercase d-none">State</label>
+                                <div class="form-group"><input type="text" name="state" placeholder="State" class="form-control"></div>
+
+
+                                <label class="text-uppercase d-none">Zip code</label>
+                                <div class="form-group"><input type="text" name="pincode" placeholder="Zip/Pin code" class="form-control"></div>
+                                
+                                
+                
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 col-lg-4 mt-2 mt-md-0">
+                        <div class="card card--grey">
+                            <div class="card-body">
+                                <h2 class="fs-6">PAYMENT METHOD</h2>
+                                <div class="row">
+                                    
+                                        <div class="customRadio clearfix">
+                                            <input type="radio" value="RazorPay" name="payment_method" checked  id="id_payment_method_1" > 
+                                            <label for="id_payment_method_1">Razpor Pay</label>
+                                            <p style="font-size: x-small;">Credit Card, Debit Card, Netbanking, UPI, Wallet & EMIs.</p>
+                                        </div>
+                                   </div>
+                                   <div class="row">
+                                        <div class="customRadio clearfix">
+                                            <input  type="radio" value="Semi Cash On Delivery" name="payment_method" id="id_payment_method_0" > 
+                                            <label for="id_payment_method_0">Semi Cash On Delivery </label>
+                                            <p style="font-size: x-small;"> To ensure safe & confirm delivery for this parcel for which the courier charges
+                                                are around Rs 1500 (free home delivery for customers), we have to make sure that
+                                                the placed order is true and not spoof and in the knowledge of elders or
+                                                guardians of underage children and rest of the amount you pay by Cash On
+                                                Delivery.</p>
+                                        </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="trustseal-img mt-4"><img src="{% static 'assets/images/payment-img.jpg' %}" alt="powerby cards" /></div> <br>
+                        <div class="order-button-payment mt-2 clearfix"><button id="submitbuton" type="submit" class="cartCheckout fs-6 btn btn-lg rounded w-100 fw-600 text-white">Place order</button></div>
+                    </div>
+               
+                </div>
+            </form>
+        </div>
+        <!--End Main Content-->
+
+    </div>
+    <!--End Body Container-->
+       
+        
+
+
+
+          <!--End Body Container-->
+      {% include 'Footer/footer.html' %}
+          <!--Scoll Top-->
+          <span id="site-scroll"><i class="icon an an-arw-up"></i></span>
+          <!--End Scoll Top-->
+
+    
+          <div class="modalOverly"></div>
+
+          
+
+              
+
+  {% include 'Index/includes/minicart-drawer.html' %}
+          <!-- Including Jquery -->
+          <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+          <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+          <!--Including Javascript-->
+          <script src="{% static 'assets/js/plugins.js' %}"></script>
+          <script src="{% static 'assets/js/main.js' %}"></script>
+
+          
+          
+          {% block extra_js %}
+          <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+          <script>
+              
+              if(localStorage.getItem('cart'))
+    {
+        
+        cart_data = JSON.parse(localStorage.getItem('cart'));
+        let id = cart_data['product_id']
+        let quantity = cart_data['quantity']
+        let xmlhttp;
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('GET',`{{ setting.url }}/cart/?id=${id}&quantity=${quantity}`, true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.status == 200 && xmlhttp.readyState == 4) {
+                let response_data = JSON.parse(xmlhttp.response);        
+                document.getElementById("total").innerHTML  = `₹${response_data["total"]}`;
+                let cart_data = response_data["data"];
+                for(let i=0;i<=cart_data.length;i++)
+                {
+                  
+                    document.getElementById("cartData").innerHTML=`
+                    <tr>
+                                        <td class="thumbImg"><a class="thumb d-inline-block"><img class="cart__image" src="${response_data["data"][i]["image"]}" alt="${response_data["data"][i]["name"]}" width="80" /></a></td>
+                                        <td class="text-start">
+                                            <a>${response_data["data"][i]["name"]}</a>
+                                            <div class="cart__meta-text">
+                                                Color: ${response_data["data"][i]["color"]}
+                                            </div>
+                                        </td>
+                                        <td>${response_data["data"][i]["price"]}</td>
+                                        <td>${response_data["data"][i]["quantity"]}</td>
+                                        <td class="fw-500">₹${response_data["data"][i]["price"] * response_data["data"][i]["quantity"] }</td>
+                                    </tr>
+                    `
+                }
+                
+            }
+
+        }
+    
+    }
+
+
+
+              
+          jQuery(document).ready(function ($) {
+              if (localStorage.getItem('cart')) {
+              product_id = JSON.parse(localStorage.getItem('cart'));
+              let id = product_id['product_id']
+              $('#productId').val(id);
+           }  
+          });
+             
+          
+              document.getElementById('submitbuton').onclick = (function (e) {
+                  if (document.getElementById("id_payment_method_1").checked == true) {
+                      e.preventDefault();
+                      Request_create_order();
+                  }
+                  else if (document.getElementById("id_payment_method_0").checked == true) {
+                      e.preventDefault();
+                      Request_create_order_cod();
+                  }
+          
+              });
+          
+          
+              function Request_create_order() {
+                  let xmlhttp;
+                  xmlhttp = new XMLHttpRequest();
+                  let cart_data = JSON.parse(localStorage.getItem('cart'));
+                   let id = cart_data['product_id']
+                let quantity = cart_data['quantity']
+                  xmlhttp.open('GET', `{{ setting.url }}/order/createorderrazorpay?id=${id}&quantity=${quantity}`, true);
+                  
+                  xmlhttp.onreadystatechange = function () {
+                      if (xmlhttp.status == 200 && xmlhttp.readyState == 4) {
+                          let response_data = JSON.parse(xmlhttp.responseText);
+                          let amount = '{{grand}}' * 100;
+                          let options = {
+                              "key": "{{razorpay_key}}",
+                              "amount": amount,
+                              "name": '{{ setting.title }}',
+                              "description": "{{ setting.description }}",
+                              "image": "",
+                              "currency": "INR",
+                              "order_id": response_data['id'],
+                              "handler": function (response) {
+                                  document.getElementById('orderform').submit();
+          
+                              },
+                              "prefill": {
+                                  "name": "",
+                                  "email": "",
+                                  "contact": ""
+                              },
+                              "theme": {
+                                  "color": "#7520dd"
+                              }
+                          };
+                          let rzp1 = new Razorpay(options);
+                          rzp1.on('payment.failed', function (response) {
+                              console.log('failed');
+                              location.href = '{{ setting.url }}/fail/';
+                          });
+                          rzp1.open();
+                      }
+                  }
+                  xmlhttp.send();
+              }
+          
+              function Request_create_order_cod() {
+                  let xmlhttp;
+                  xmlhttp = new XMLHttpRequest();
+                  xmlhttp.open('GET', '{{ setting.url }}/order/createorderrazorpaycod/', true);
+          
+                  xmlhttp.onreadystatechange = function () {
+                      if (xmlhttp.status == 200 && xmlhttp.readyState == 4) {
+                          let response_data = JSON.parse(xmlhttp.responseText);
+                          let amount = '{{grand}}' * 100;
+                          let options = {
+                              "key": "{{razorpay_key}}",
+                              "amount": amount,
+                              "name": '{{ setting.title }}',
+                              "description": "{{ setting.description }}",
+                              "image": "",
+                              "currency": "INR",
+                              "order_id": response_data['id'],
+                              "handler": function (response) {
+                                  document.getElementById('orderform').submit();
+          
+                              },
+                              "prefill": {
+                                  "name": "",
+                                  "email": "",
+                                  "contact": ""
+                              },
+                              "theme": {
+                                  "color": "#7520dd"
+                              }
+                          };
+                          let rzp1 = new Razorpay(options);
+                          rzp1.on('payment.failed', function (response) {
+                              console.log('failed');
+                              location.href = '{{ setting.url }}/fail/';
+                          });
+                          rzp1.open();
+                      }
+                  }
+          
+                  xmlhttp.send();
+              }
+          
+          </script>
+          
+{% endblock extra_js %}
+              
+      </div>
+      <!--End Page Wrapper-->
+</body>
+
+
+{% endblock body %}
+
+
+
+
+  

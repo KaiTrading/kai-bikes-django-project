@@ -1,0 +1,173 @@
+{% extends 'Base/base.html' %} 
+{% load static %}
+{% block content %}
+<section class="cart_section sec_ptb_140 clearfix">
+    <div class="container">
+
+        <ul class="checkout_step ul_li clearfix">
+            <li class="active"><a href="/cart"><span>01.</span> Shopping Cart</a></li>
+            <li><a href="/order/checkout"><span>02.</span> Checkout</a></li>
+            <li><a ><span>03.</span> Order Completed</a></li>
+        </ul>
+
+        <div class="cart_table mb_50">
+            <table class="table">
+                <thead class="text-uppercase bg-white border-bottom">
+                    <tr>
+                        <th>Photo</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="cartdata">
+                    <!-- {% for rs in shopcart %}
+                    <tr>
+                        <td>
+                            <div class="cart_product">
+                                <div class="item_image">
+                                    {% if rs.variant.image_id  > 0 %}
+                                    <img src="{{rs.variant.image}}" alt="{{ setting.title }}">
+                                    {% else %}
+                                    <img src="{{rs.image.url}}" alt="{{ setting.title }}">
+                                    {% endif %}
+                                </div>
+                                <div class="item_content">
+                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}">
+                                        <h4 class="item_title">{{ rs.title }} - {{ rs.variant.color }}</h4>
+                                    </a>
+                                    <span class="item_type"><a href="/category/{{ rs.category.id }}/{{ rs.category.slug }}">{{ rs.category.title }}</a></span>
+                                    
+                                </div>
+                                <a href="/order/deletefromcart/{{ rs.id }}">
+                                    <button type="button" class="remove_btn">
+                                        <i class="fal fa-times"></i>
+                                    </button>
+                                </a>
+                            </div>
+                        </td>
+                        <td>
+                            {% if rs.variant == None %}
+                            <span class="price_text">₹{{rs.price}}</span>
+                            {% else %}
+                            <span class="price_text"><strong>₹{{rs.variant.price}}</strong><del>₹{{ rs.price }}<del></span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="quantity_input">
+                                <form >
+                                    <input disabled class="input_number" type="text" value="{{rs.quantity}}">
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                            {% if rs.variant == None %}
+                            <span class="total_price">₹{{rs.amount}}</span>
+                            {% else %}
+                            <span class="total_price">₹{{rs.varamount}}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %} -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="coupon_wrap mb_50">
+            <div class="row justify-content-lg-between">
+                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                    <div class="coupon_form">
+                        <div class="form_item mb-0">
+                            <input type="text" class="coupon" placeholder="Coupon Code">
+                        </div>
+                        <button type="submit" class="custom_btn bg_danger text-uppercase">Apply Coupon</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-lg-end">
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div class="cart_pricing_table pt-0 text-uppercase" data-bg-color="#f2f3f5">
+                    <h3 class="table_title text-center" data-bg-color="#ededed">Cart Total</h3>
+                    <ul class="ul_li_block clearfix">
+                        <li><span>Subtotal</span> <span id="Subtotal"></span></li>
+                        <li><span>Total Save</span> <span>₹{{save}}</span></li>
+                        <li><span>Total</span> <span id="total"></span></li>
+                    </ul>
+                    <a href="/order/checkout" class="custom_btn bg_success">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock content %}
+
+
+
+{% block extra_js %}
+<script>
+
+    if(localStorage.getItem('cart'))
+    {
+        
+        cart_data = JSON.parse(localStorage.getItem('cart'));
+        let id = cart_data['product_id']
+        let quantity = cart_data['quantity']
+        
+        let xmlhttp;
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('GET',`{{ setting.url }}/cart/?id=${id}&quantity=${quantity}`, true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.status == 200 && xmlhttp.readyState == 4) {
+                let response_data = JSON.parse(xmlhttp.response);
+                document.getElementById("Subtotal").innerHTML  = `₹${response_data["total"]}`;
+                
+                document.getElementById("total").innerHTML = `₹${response_data["total"]}`;
+                let cart_data = response_data["data"];
+                for(let i=0;i<=cart_data.length;i++)
+                {
+                    document.getElementById("cartdata").innerHTML=`
+                    
+                    <tr>
+                        <td>
+                            <div class="cart_product">
+                                <div class="item_image">
+                                    
+                                    <img src="${response_data["data"][i]["image"]}" alt="${response_data["data"][i]["title"]}">
+        
+                                </div>
+                        
+                        </td>
+                        <td>
+                
+                            <span class="price_text"><strong>${response_data["data"][i]["name"]}</strong>
+                
+                        </td>
+                        <td>
+                            <div class="quantity_input">
+                                <form >
+                                    <input disabled class="input_number" type="text" value="${response_data["data"][i]["quantity"]}">
+                                </form>
+                            </div>
+                        </td>
+                        <td>
+                          
+                            <span class="total_price"><span class="price_text"><strong>₹${response_data["data"][i]["price"] * response_data["data"][i]["quantity"]}</strong></span>
+                       
+                        </td>
+                    </tr>
+                    
+                    `
+                }
+                
+            }
+
+        }
+    
+    }
+</script>
+{% endblock extra_js %}
+    

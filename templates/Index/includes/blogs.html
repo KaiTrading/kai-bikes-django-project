@@ -1,0 +1,36 @@
+ <!--Blog Post-->
+ <section class="section home-blog-post">
+    <div class="container">
+        <div class="section-header">
+            <h2>Fresh From Our Blog</h2>
+            <p>TOP NEWS STORIES OF THE DAY</p>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="blog-post-slider">
+                    {% for blog in blogs %}
+                    <div class="blogpost-item">
+                       
+                            <img class="blur-up lazyload" style="height: 250px;" src="{{blog.image.url}}" data-src="{{blog.image.url}}" alt="blog" title=""/>
+                        
+                        <div class="post-detail">
+                            <h3 class="post-title mb-3">{{blog.title}}</h3>
+                            <ul class="publish-detail d-flex-center mb-3">
+                                <li class="d-flex align-items-center"><i class="an an-calendar me-2"></i> <span class="article__date">{{blog.created_at}}</span></li>
+                                
+                            </ul>
+                            <p class="exceprt">
+                                {{ blog.content }}
+                            </p>
+                           
+                        </div>
+                    </div>
+                    {% endfor %}
+             
+                 
+                </div>
+            </div>
+        </div>
+    </div>      
+</section>
+<!--End Blog Post-->
