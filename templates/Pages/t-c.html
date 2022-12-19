@@ -1,6 +1,52 @@
+
 {% extends 'Base/base.html' %} 
 {% load static %}
 {% block title %} Terms and Conditions - {{ setting.title }} {% endblock %}
-{% block content %}
-{{ setting.terms_conditions }}
-{% endblock content %}
+{% block body %}
+<body class="about-page about-pstyle1">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." /></div>
+    <!-- End Page Loader -->
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+        {% include 'Header/header.html' %}
+
+        <div id="page-content">
+            <!--Collection Banner-->
+            <div class="collection-header">
+                <div class="collection-hero m-0">
+                    <div class="collection-hero__image"></div>
+                    <div class="collection-hero__title-wrapper container">
+                        <h1 class="collection-hero__title">Terms and Conditions</h1>
+                        <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="/" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">Terms and Conditions</span></div>
+                    </div>
+                </div>
+            </div>
+            <!--Main Content-->
+            <!--Content Info-->
+            <div class="container section">
+                <div class="row about-info1">
+                    {{ setting.terms_conditions | safe }}
+                </div>
+            </div>
+        <!--End Body Container-->
+        {% include 'Footer/footer.html' %}
+        <!--Scoll Top-->
+        <!-- <span id="site-scroll"><i class="icon an an-arw-up"></i></span> -->
+        <!--End Scoll Top-->
+
+        <div class="modalOverly"></div>
+
+        {% include 'Index/includes/minicart-drawer.html' %}
+        <!-- Including Jquery -->
+        <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+        <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+        <!--Including Javascript-->
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>   
+
+    </div>
+    <!--End Page Wrapper-->
+</body>
+{% endblock body %}
