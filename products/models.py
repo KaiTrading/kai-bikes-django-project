@@ -170,7 +170,7 @@ class CommentForm(ModelForm):
 
 class BlogModel(models.Model):
     title = models.CharField(max_length=100)
-    image = CloudinaryField('blogimage', folder = "product/variant")
+    image = CloudinaryField('blogimage', folder = "blog")
     content = RichTextUploadingField()
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
