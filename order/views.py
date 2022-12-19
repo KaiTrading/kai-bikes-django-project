@@ -188,7 +188,7 @@ def Create_RazorPayOrder(request):
     grand_total=response.json()['total']
     grand_total=float(grand_total)
     #authenticating with razorpay client
-    client = razorpay.Client(auth=('rzp_test_UjbWEDS6lvVsrv','X3zNpob8xqKPwqFsqOvTadhl' ))
+    client = razorpay.Client(auth=('rzp_live_szMbVIbgvLVk1W','AE1RadvqaHXXbRymUrlEHViS' ))
 
 
     #creating order in razorpay dashboard
@@ -203,7 +203,7 @@ def Create_RazorPayOrder_Cod(request):
     # grand_total=response['grand']
     # grand_total=float(grand_total)
     #authenticating with razorpay client
-    client = razorpay.Client(auth=('rzp_test_UjbWEDS6lvVsrv','X3zNpob8xqKPwqFsqOvTadhl' ))
+    client = razorpay.Client(auth=('rzp_live_szMbVIbgvLVk1W','AE1RadvqaHXXbRymUrlEHViS' ))
 
 
     #creating order in razorpay dashboard
