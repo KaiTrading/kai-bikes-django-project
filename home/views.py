@@ -31,7 +31,7 @@ def index(request):
     
     current_user = request.user  # Access User Session information
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
-    slider = Slider.objects.all().order_by('id') [:2]
+    slider = Slider.objects.all().order_by('id') [:3]
     latest_products = Product.objects.all().order_by('id') [:4]
     popular_products = Product.objects.all().order_by('?') [:4]
     banner = Banner.objects.all().order_by('id') [:3]
