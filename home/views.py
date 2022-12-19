@@ -158,10 +158,7 @@ def search(request):
 def pp(request):
     setting = Site_Profile.objects.get(pk=1)
     topnav = Top_Nav.objects.all()
-    
     f1 = Foot1_Nav.objects.all() [:5]
-    
-    
     current_user = request.user  # Access User Session information
     shopcart = ShopCart.objects.filter(user_id=current_user.id)
     total=0
@@ -173,6 +170,7 @@ def pp(request):
         save += totaloff - total
     context = {'setting':setting, 'shopcart': shopcart, 'f1': f1,   'topnav': topnav,  'total': total, 'save': save}
     return render(request, 'Pages/privecy-policy.html', context)
+    
 def rp(request):
     setting = Site_Profile.objects.get(pk=1)
     topnav = Top_Nav.objects.all()
