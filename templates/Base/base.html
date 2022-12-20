@@ -1,21 +1,18 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!--Required Meta Tags-->
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="description">
-    <meta name="google-site-verification" content="19MC1kKs6s1rKDqSNGI7ByKI89Fz-5edub37EHpCihQ" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{% block description %} {% endblock description %}" />
+    <meta
+      name="google-site-verification"
+      content="19MC1kKs6s1rKDqSNGI7ByKI89Fz-5edub37EHpCihQ"
+    />
     <!-- Title Of Site -->
-    <title>
-            {% block title %}
-        
-    {% endblock title %}
-
-    </title>
+    <title>{% block title %} {% endblock title %}</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
     <!-- Plugins CSS -->
@@ -24,82 +21,79 @@
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
     <style>
-        .tooltip-text {
-            visibility: hidden;
-            width: 120px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: xx-small;
-        }
-        
-        .tooltip-text::after {
-          content: "";
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          margin-left: -5px;
-          border-width: 5px;
-          border-style: solid;
-          border-color: #555 transparent transparent transparent;
-        }
-        
-        .customRadio :hover .tooltip-text {
-          visibility: visible;
-          opacity: 1;
-        }
-        </style>
-</head>
-
-
-{% block body %}
-    
-{% endblock body %}
-        
-<script>
-  var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?69361';
-  var s = document.createElement('script');
-  s.type = 'text/javascript';
-  s.async = true;
-  s.src = url;
-  var options = {
-      "enabled": true,
-      "chatButtonSetting": {
-          "backgroundColor": "#4dc247",
-          "ctaText": "",
-          "borderRadius": "10",
-          "marginLeft": "0",
-          "marginBottom": "24",
-          "marginRight": "24",
-          "position": "right"
-      },
-      "brandSetting": {
-          "brandName": "Kai Bikes",
-          "brandSubTitle": "Typically replies within a hour",
-          "brandImg": "{% static 'assets/images/favicon.png' %}",
-          "welcomeText": "Hi there!\nHow can I help you?",
-          "messageText": "Hello, I have a question about {{page_link}}",
-          "backgroundColor": "#e6e625",
-          "ctaText": "Start Chat",
-          "borderRadius": "25",
-          "autoShow": false,
-          "phoneNumber": "7043464986"
+      .tooltip-text {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: xx-small;
       }
-  };
-  s.onload = function () {
-      CreateWhatsappChatWidget(options);
-  };
-  var x = document.getElementsByTagName('script')[0];
-  x.parentNode.insertBefore(s, x);
-</script>
 
+      .tooltip-text::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+      }
+
+      .customRadio :hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  {% block body %} {% endblock body %}
+
+  <script>
+    var url =
+      "https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?69361";
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = url;
+    var options = {
+      enabled: true,
+      chatButtonSetting: {
+        backgroundColor: "#4dc247",
+        ctaText: "",
+        borderRadius: "10",
+        marginLeft: "0",
+        marginBottom: "24",
+        marginRight: "24",
+        position: "right",
+      },
+      brandSetting: {
+        brandName: "Kai Bikes",
+        brandSubTitle: "Typically replies within a hour",
+        brandImg: "{% static 'assets/images/favicon.png' %}",
+        welcomeText: "Hi there!\nHow can I help you?",
+        messageText: "Hello, I have a question about {{page_link}}",
+        backgroundColor: "#e6e625",
+        ctaText: "Start Chat",
+        borderRadius: "25",
+        autoShow: false,
+        phoneNumber: "7043464986",
+      },
+    };
+    s.onload = function () {
+      CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName("script")[0];
+    x.parentNode.insertBefore(s, x);
+  </script>
 </html>
