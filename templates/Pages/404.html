@@ -1,22 +1,57 @@
 {% extends 'Base/base.html' %} {% load static %} 
 {% block title %} Page Not Found - {{ setting.title }} {% endblock %}
-{% block content %}
+{% block body %}
+<body class="about-page about-pstyle1">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="{% static 'assets/images/loader.gif' %}" alt="Loading..." /></div>
+    <!-- End Page Loader -->
 
-<!-- main_contact_section - start
-			================================================== -->
-<section class="error_section sec_ptb_140 clearfix">
-  <div class="container">
-    <div class="error_content text-center">
-      <h2 class="error_text d-flex align-items-center justify-content-center">
-        4
-        <span><img src="assets/images/404.png" alt="{{ setting.title }}" /></span> 4
-      </h2>
-      <h3>PAGE NOT FOUND</h3>
-      <p>THE PAGE YOU ARE LOOKING FOR DOES NOT EXIST</p>
-      <a class="goback_home" href="index.html">PLEASE RETURN TO HOME PAGE</a>
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+        {% include 'Header/header.html' %}
+
+        <div id="page-content">
+            <!--Collection Banner-->
+            <div class="collection-header">
+                <div class="collection-hero m-0">
+                    <div class="collection-hero__image"></div>
+                    <div class="collection-hero__title-wrapper container">
+                        <h1 class="collection-hero__title">404 ERROR PAGE</h1>
+                        <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="/" title="Back to the home page">Home</a><span>|</span><span class="fw-bold">404 ERROR PAGE</span></div>
+                    </div>
+                </div>
+            </div>
+            <!--Main Content-->
+            <!--Content Info-->
+            <div class="container">
+              <div class="row">
+                  <div class="col-12 text-center">
+                      <div class="error-content py-4">
+                          <img src="{% static 'assets/images/error-404.jpg" alt="error-404' %}" />
+                          <div class="page-title"><h1>404 - PAGE NOT FOUND</h1></div>
+                          <p>We can't seem to find page you are looking for.</p>
+                          <p><a href="index.html" class="btn btn-outline-primary rounded text-capitalize mb-2 me-2">Go Back</a><a href="shop-left-sidebar.html" class="btn rounded mb-2 text-capitalize">Continue shopping</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        <!--End Body Container-->
+        {% include 'Footer/footer.html' %}
+        <!--Scoll Top-->
+        <!-- <span id="site-scroll"><i class="icon an an-arw-up"></i></span> -->
+        <!--End Scoll Top-->
+
+        <div class="modalOverly"></div>
+
+        {% include 'Index/includes/minicart-drawer.html' %}
+        <!-- Including Jquery -->
+        <script src="{% static 'assets/js/vendor/jquery-min.js' %}"></script>
+        <script src="{% static 'assets/js/vendor/js.cookie.js' %}"></script>
+        <!--Including Javascript-->
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>   
+
     </div>
-  </div>
-</section>
-<!-- main_contact_section - end
-			================================================== -->
-{% endblock content %}
+    <!--End Page Wrapper-->
+</body>
+{% endblock body %}
