@@ -11,11 +11,11 @@
                     {% for blog in blogs %}
                     <div class="blogpost-item">
                        
-                            <a href="/product/{{blog.id}}"><img class="blur-up lazyload" style="height: 250px;" src="{{blog.image.url}}" data-src="{{blog.image.url}}" alt="blog" title=""/></a>
+                            <a href="/blog/{{blog.id}}"><img class="blur-up lazyload" style="height: 250px;" src="{{blog.image.url}}" data-src="{{blog.image.url}}" alt="blog" title=""/></a>
                         
                         <div class="post-detail">
                             
-                            <a href="/product/{{blog.id}}"><h3 class="post-title mb-3 mt-4">{{blog.title}}</h3></a>
+                            <a href="/blog/{{blog.id}}"><h3 class="post-title mb-3 mt-4">{{blog.title}}</h3></a>
                             <ul class="publish-detail d-flex-center mb-3">
                                 <li class="d-flex align-items-center"><i class="an an-calendar me-2"></i> <span class="article__date">{{blog.created_at}}</span></li>
                                 
