@@ -18,7 +18,7 @@ class Category (MPTTModel):
     parent = TreeForeignKey('self',blank=True, null=True ,related_name='children', on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     keyword = models.CharField(max_length=255)
-    description = RichTextUploadingField()
+    description = models.CharField(max_length=3000)
     image = CloudinaryField('image',folder = "category")
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
