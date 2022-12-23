@@ -14,6 +14,7 @@ urlpatterns = [
     path('product/', include('products.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('product/<int:id>/<slug:slug>', views.product_detail, name='product_detail'),
+    path('blog/<int:id>', views.BlogDetailView, name='blogdetail'),
     path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),
     path('ajaxcolor/', views.ajaxcolor, name='ajaxcolor'),
     path('search/', views.search, name='search'),

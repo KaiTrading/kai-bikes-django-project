@@ -135,6 +135,14 @@ def product_detail(request, id, slug):
     
     return render(request,'Product/product.html',context)
 
+def BlogDetailView(request,id):
+   setting = Site_Profile.objects.get(pk=1)
+   topnav = Top_Nav.objects.all()
+   f1 = Foot1_Nav.objects.all() [:5]
+   blog = BlogModel.objects.get(id=id)
+   context={'blog':blog,'setting':setting,'topnav':topnav,'f1':f1}
+   return render(request,'Pages/blog.html',context)
+
 def ajaxcolor(request):
     data = {}
     if request.POST.get('action') == 'post':
