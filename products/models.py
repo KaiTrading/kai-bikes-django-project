@@ -172,6 +172,10 @@ class BlogModel(models.Model):
     title = models.CharField(max_length=100)
     image = CloudinaryField('blogimage', folder = "blog")
     content = RichTextUploadingField()
+    slug = models.SlugField(null=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
