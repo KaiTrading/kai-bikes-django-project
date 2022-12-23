@@ -135,7 +135,7 @@ def product_detail(request, id, slug):
     
     return render(request,'Product/product.html',context)
 
-def BlogDetailView(request,id):
+def BlogDetailView(request,id, slug):
    setting = Site_Profile.objects.get(pk=1)
    topnav = Top_Nav.objects.all()
    f1 = Foot1_Nav.objects.all() [:5]
