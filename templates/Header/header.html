@@ -112,7 +112,7 @@
             <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
                 <ul id="MobileNav" class="mobile-nav">
                     {% for lp in topnav %}
-                    <li class="lvl1 parent megamenu"><a href={% if request.path == '{{ lp.link }}' %}  {% endif %} href="{{ lp.link }}" >{{ lp.link_text }} </a>
+                    <li class="lvl1 parent megamenu"><a href="{{ lp.link }}" >{{ lp.link_text }} </a>
                     </li>
                     {% endfor %}
                     <li class="help bottom-link"><a href="tel:{{ setting.telephone }}"><b>NEED HELP?</b><br>Call: +91 {{ setting.telephone }}</a></li>
