@@ -27,6 +27,6 @@ urlpatterns = [
     path('logout/', UserViews.logout_func, name='logout'),
     path('signup/', UserViews.signup_form, name='signup'),
     path('cart/', OrderViews.shopcart, name='shopcart'),
-] + static(settings.MEDIA_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'home.views.error_404'
