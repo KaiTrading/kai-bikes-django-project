@@ -152,7 +152,7 @@ cloudinary.config(
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 
 CKEDITOR_UPLOAD_PATH = 'media/upload/'
-CKEDITOR_IMAGE_BACKEND = "cloudinary"
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 CKEDITOR_CONFIGS = {
     'default': {
@@ -168,6 +168,7 @@ CKEDITOR_CONFIGS = {
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
