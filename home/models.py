@@ -11,7 +11,7 @@ class Site_Profile(models.Model):
         ('False', 'False'),
     )
     title = models.CharField(max_length=150)
-    logo = models.ImageField(blank=True, upload_to='root/')
+    logo = CloudinaryField('logo', folder = "logo")
     keywords = models.CharField(max_length=255,blank=True)
     description = models.CharField(max_length=255,blank=True)
     url = models.CharField(max_length=255,blank=True)
